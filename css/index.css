@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+}
+
+/*
+@import 'partials/nav1';
+@media (orientation: landscape) {
+    @import 'partials/nav2';
+}
+nav{
+    img{
+        height: auto;
+    }
+}
+footer{
+    background-color: blue;
+    color: white;
+}*/
+/*
+Resources for animation test:
+
+#div1{
+    background-color: red;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+}
+#div2{
+    background-color: blue;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    bottom: 0;
+}
+#p1{
+    z-index: 1;
+}
+#p-place{
+    margin: 0;
+    visibility: hidden;
+}*/
+.title {
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: underline;
+}
+/*# sourceMappingURL=index.css.map */
