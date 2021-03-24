@@ -1,6 +1,49 @@
-body{
+*{
     margin: 0;
-}/*
+    color: white;
+    text-align: center;
+}
+header{
+    background-color: black;
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1.15vh double lime;
+    nav{
+        background-color: gray;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    h1{
+        font-size: 46.3px;
+        text-decoration: underline 2px;
+    }
+}
+main{
+    background-color: blue;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    /*
+    aside{
+        background-color: black;
+        width: 12.5%;
+        position: fixed;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+    }*/
+    #mainImage{
+        height: 95%;
+        margin: auto 0 auto;
+    }
+}
+/*
 @import 'partials/nav1';
 @media (orientation: landscape) {
     @import 'partials/nav2';
@@ -38,10 +81,3 @@ Resources for animation test:
     margin: 0;
     visibility: hidden;
 }*/
-.title{
-    margin: {
-        left: auto;
-        right: auto;
-    }
-    text-decoration: underline;
-}
