@@ -1,5 +1,158 @@
-body {
+* {
   margin: 0;
+  color: white;
+  text-align: center;
+}
+
+body {
+  background: -webkit-gradient(linear, left top, right top, from(darkviolet), color-stop(blue), to(darkviolet));
+  background: linear-gradient(to right, darkviolet, blue, darkviolet);
+}
+
+header {
+  background-color: black;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1.15vh double lime;
+}
+
+header nav {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+header nav .panel1 {
+  width: 0;
+  height: 0;
+  border-right: solid transparent;
+  border-left: solid transparent;
+}
+
+header nav .backPanel {
+  background-color: blue;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+header nav .frontPanel {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: green;
+}
+
+header nav .frontPanel * {
+  position: absolute;
+}
+
+header h1 {
+  font-size: 3rem;
+  -webkit-text-decoration: underline 2px;
+          text-decoration: underline 2px;
+}
+
+main {
+  width: 100%;
+  /*
+    aside{
+        background-color: black;
+        width: 12.5%;
+        position: fixed;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+    }*/
+}
+
+main .row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+main .row .mainText {
+  font-size: 2.4rem;
+  line-height: 2.8rem;
+  max-width: 40%;
+  max-height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: black;
+  border: 1.15vh double fuchsia;
+}
+
+main .row #image1 {
+  height: 95%;
+  margin: auto 0 auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1.15vh solid black;
+  border-radius: 10% 10% 10% 10%;
+}
+
+main .row #image2 {
+  height: 75%;
+  margin: auto 0 auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1.15vh solid black;
+  border-radius: 10% 10% 10% 10%;
+}
+
+footer {
+  background-color: darkblue;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1.15vh double lime;
 }
 
 /*
@@ -40,9 +193,4 @@ Resources for animation test:
     margin: 0;
     visibility: hidden;
 }*/
-.title {
-  margin-left: auto;
-  margin-right: auto;
-  text-decoration: underline;
-}
 /*# sourceMappingURL=index.css.map */
