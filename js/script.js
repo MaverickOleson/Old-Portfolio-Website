@@ -14,6 +14,7 @@ $(window).resize(function() {
     $('header nav').css('margin-left', $('header nav').css('margin-top'));
     $('main').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
 })
+
 /*
 Function to animate/reposition elements from navigation to body:
 

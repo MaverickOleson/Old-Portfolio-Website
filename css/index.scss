@@ -17,6 +17,20 @@ header{
         position: fixed;
         top: 0;
         left: 0;
+        .panel1{
+            border: {
+                right: 50px solid transparent; 
+                left: 50px solid transparent; 
+                bottom: 86.60254px solid salmon;
+            }
+        }
+        .backPanel{
+            background-color: blue;
+            transform: rotateY(180deg);
+        }
+        .frontPanel{
+            background-color: green;
+        }
     }
     h1{
         font-size: 46.3px;
