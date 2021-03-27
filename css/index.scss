@@ -9,10 +9,11 @@ body{
 header{
     background-color: black;
     width: 100%;
-    height: fit-content;
+    min-height: 19vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     border: 1.15vh double lime;
     nav{
@@ -36,6 +37,7 @@ header{
         .backPanel{
             background-color: blue;
             transform: rotateY(180deg);
+            z-index: 2;
         }
         .frontPanel{
             width: fit-content;
@@ -46,8 +48,8 @@ header{
         }
     }
     h1{
-        font-size: 3rem;
-        text-decoration: underline 2px;
+        font-size: 3.4vw;
+        text-decoration: underline 0.3vh;
     }
 }
 main{
@@ -59,16 +61,17 @@ main{
         align-items: center;
         justify-content: space-evenly;
         .mainText{
-            font-size: 2.4rem;
-            line-height: 2.8rem;
-            max-width: 40%;
-            max-height: 100%;
+            font-size: 2.3vw;
+            line-height: 3vw;
+            max-width: 45%;
+            max-height: 95%;
             box-sizing: border-box;
             background-color: black;
             border: 1.15vh double fuchsia;
         }
         #image1{
-            height: 95%;
+            max-width: 50%;
+            max-height: 95%;
             margin: auto 0 auto;
             box-sizing: border-box;
             border: 1.15vh solid black;
@@ -82,16 +85,6 @@ main{
             border-radius: 10% 10% 10% 10%;
         }
     }
-    /*
-    aside{
-        background-color: black;
-        width: 12.5%;
-        position: fixed;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        align-content: space-around;
-    }*/
 }
 footer{
     background-color: darkblue;

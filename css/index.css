@@ -12,9 +12,7 @@ body {
 header {
   background-color: black;
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  min-height: 19vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -25,6 +23,9 @@ header {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border: 1.15vh double lime;
@@ -55,6 +56,7 @@ header nav .backPanel {
   background-color: blue;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
+  z-index: 2;
 }
 
 header nav .frontPanel {
@@ -69,23 +71,13 @@ header nav .frontPanel * {
 }
 
 header h1 {
-  font-size: 3rem;
-  -webkit-text-decoration: underline 2px;
-          text-decoration: underline 2px;
+  font-size: 3.4vw;
+  -webkit-text-decoration: underline 0.3vh;
+          text-decoration: underline 0.3vh;
 }
 
 main {
   width: 100%;
-  /*
-    aside{
-        background-color: black;
-        width: 12.5%;
-        position: fixed;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        align-content: space-around;
-    }*/
 }
 
 main .row {
@@ -106,10 +98,10 @@ main .row {
 }
 
 main .row .mainText {
-  font-size: 2.4rem;
-  line-height: 2.8rem;
-  max-width: 40%;
-  max-height: 100%;
+  font-size: 2.3vw;
+  line-height: 3vw;
+  max-width: 45%;
+  max-height: 95%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background-color: black;
@@ -117,7 +109,8 @@ main .row .mainText {
 }
 
 main .row #image1 {
-  height: 95%;
+  max-width: 50%;
+  max-height: 95%;
   margin: auto 0 auto;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
