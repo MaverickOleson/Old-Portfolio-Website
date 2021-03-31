@@ -9,7 +9,7 @@ body {
   background: linear-gradient(to right, darkviolet, blue, darkviolet);
 }
 
-header {
+body header {
   background-color: black;
   width: 100%;
   min-height: 19vh;
@@ -31,7 +31,7 @@ header {
   border: 1.15vh double lime;
 }
 
-header nav {
+body header nav {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -41,46 +41,40 @@ header nav {
   position: fixed;
   top: 0;
   left: 0;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
-header nav .panel1 {
-  width: 0;
-  height: 0;
+body header nav .panel1 * {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   border-right: solid transparent;
   border-left: solid transparent;
 }
 
-header nav .backPanel {
-  background-color: blue;
+body header nav .backPanel {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
-  z-index: 2;
+  z-index: -1;
 }
 
-header nav .frontPanel {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  background-color: green;
-}
-
-header nav .frontPanel * {
+body header nav .frontPanel * {
   position: absolute;
 }
 
-header h1 {
+body header h1 {
   font-size: 3.4vw;
   -webkit-text-decoration: underline 0.3vh;
           text-decoration: underline 0.3vh;
 }
 
-main {
+body main {
   width: 100%;
 }
 
-main .row {
+body main .row {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -97,7 +91,7 @@ main .row {
           justify-content: space-evenly;
 }
 
-main .row .mainText {
+body main .row .mainText {
   font-size: 2.3vw;
   line-height: 3vw;
   max-width: 45%;
@@ -108,7 +102,7 @@ main .row .mainText {
   border: 1.15vh double fuchsia;
 }
 
-main .row #image1 {
+body main .row #image1 {
   max-width: 50%;
   max-height: 95%;
   margin: auto 0 auto;
@@ -118,7 +112,7 @@ main .row #image1 {
   border-radius: 10% 10% 10% 10%;
 }
 
-main .row #image2 {
+body main .row #image2 {
   height: 75%;
   margin: auto 0 auto;
   -webkit-box-sizing: border-box;
@@ -127,7 +121,7 @@ main .row #image2 {
   border-radius: 10% 10% 10% 10%;
 }
 
-footer {
+body footer {
   background-color: darkblue;
   width: 100%;
   height: -webkit-fit-content;
