@@ -21,23 +21,25 @@ body{
             position: fixed;
             top: 0;
             left: 0;
-            .panel1{
+            *{
                 *{
-                    width: fit-content;
-                    height: fit-content;
+                    width: 0;
+                    height: 0;
                     border: {
-                        right: solid transparent; 
+                        right: solid transparent;
                         left: solid transparent; 
                     }
                 }
-            }
-            .backPanel{
-                transform: rotateY(180deg);
-                z-index: -1;
-            }
-            .frontPanel{
-                *{
-                    position: absolute;
+                .backPanel{
+                    transform: rotateY(180deg);
+                    z-index: -1;
+                    border-bottom: solid blue;
+                }
+                .frontPanel{
+                    *{
+                        position: absolute;
+                    }
+                    border-bottom: solid salmon;
                 }
             }
         }

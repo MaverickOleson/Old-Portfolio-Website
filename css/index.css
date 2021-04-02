@@ -43,24 +43,25 @@ body header nav {
   left: 0;
 }
 
-body header nav .panel1 * {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+body header nav * * {
+  width: 0;
+  height: 0;
   border-right: solid transparent;
   border-left: solid transparent;
 }
 
-body header nav .backPanel {
+body header nav * .backPanel {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
   z-index: -1;
+  border-bottom: solid blue;
 }
 
-body header nav .frontPanel * {
+body header nav * .frontPanel {
+  border-bottom: solid salmon;
+}
+
+body header nav * .frontPanel * {
   position: absolute;
 }
 
