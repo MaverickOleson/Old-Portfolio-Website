@@ -41,9 +41,11 @@ body header nav {
   position: fixed;
   top: 0;
   left: 0;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
 }
 
-body header nav * * {
+body header nav * div {
   width: 0;
   height: 0;
   border-right: solid transparent;
@@ -51,8 +53,7 @@ body header nav * * {
 }
 
 body header nav * .backPanel {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
+  position: absolute;
   z-index: -1;
   border-bottom: solid blue;
 }

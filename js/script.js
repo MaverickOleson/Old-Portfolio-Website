@@ -1,13 +1,15 @@
 $(function() {
     $('header h1').css({'margin-top': $('header h1').height() / 8, 'margin-bottom': $('header h1').height() / 8});
-    $('header nav * *').css({'border-right-width': $('header').height() / 4.5 * 2,'border-left-width': $('header').height() / 4.5 * 2});
-    $('header nav * *').css('border-bottom-width', Math.sqrt(Math.pow(Number($('header nav * *').css('border-right-width').split('px')[0]), 2) * 4 - Math.pow(Number($('header nav * *').css('border-right-width').split('px')[0]), 2)));
-    $('header nav').css('margin-top', ($('header').outerHeight() - Math.tan(60 * Math.PI / 180) * Number($('header nav * *').css('border-right-width').split('px')[0])) / 2);
+    $('header nav * div').css({'border-right-width': $('header').height() / 4.5 * 2,'border-left-width': $('header').height() / 4.5 * 2});
+    $('header nav * div').css('border-bottom-width', Math.sqrt(Math.pow(Number($('header nav * div').css('border-right-width').split('px')[0]), 2) * 4 - Math.pow(Number($('header nav * div').css('border-right-width').split('px')[0]), 2)));
+    $('header nav').css('margin-top', ($('header').outerHeight() - Math.tan(60 * Math.PI / 180) * Number($('header nav * div').css('border-right-width').split('px')[0])) / 2);
     $('header nav').css('margin-left', $('header nav').css('margin-top'));
-    //$('header nav * * *').css({'left': $('header nav').width() / 2 - $('header nav * * *').width() / 2, 'top': Math.tan(60 * Math.PI / 180) * Number($('header nav *').css('border-right-width').split('px')[0]) / 2});
+    $('header nav * div *').css({'left': Number($('header nav * div').css('border-right-width').split('px')[0]), 'top': Math.tan(60 * Math.PI / 180) * Number($('header nav * div').css('border-right-width').split('px')[0]) / 2});
+    $('header nav * .frontPanel').animate({transform: 'rotateY(90deg)'}, 3000);
+    $('header nav * .backPanel').css('animation', 'spin2 7.5s infinite ease-in-out');
     $('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
 });
-$(window).resize(function() {
+/*$(window).resize(function() {
     $('header h1').css({'margin-top': $('header h1').height() / 8, 'margin-bottom': $('header h1').height() / 8});
     $('header nav *').css({'border-right-width': $('header').height() / 4.5 * 2,'border-left-width': $('header').height() / 4.5 * 2});
     $('header nav').css('margin-top', ($('header').outerHeight() - Math.tan(60 * Math.PI / 180) * Number($('header nav *').css('border-right-width').split('px')[0])) / 2);
@@ -15,7 +17,7 @@ $(window).resize(function() {
     $('nav .panel1').css('border-bottom', '' + Math.sqrt(Math.pow(Number($('nav .panel1').css('border-right-width').split('px')[0]), 2) * 4 - Math.pow(Number($('nav .panel1').css('border-right-width').split('px')[0]), 2)) + 'px solid salmon');
     $('nav .panel1 .frontPanel *').css({'left': $('nav').width() / 2 - $('nav .panel1 .frontPanel *').width() / 2, 'top': Math.tan(60 * Math.PI / 180) * Number($('header nav *').css('border-right-width').split('px')[0]) / 2});
     $('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
-})
+})*/
 
 /*
 Function to animate/reposition elements from navigation to body:

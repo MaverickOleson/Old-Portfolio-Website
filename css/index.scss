@@ -21,8 +21,9 @@ body{
             position: fixed;
             top: 0;
             left: 0;
+            transform-style: preserve-3d;
             *{
-                *{
+                div{
                     width: 0;
                     height: 0;
                     border: {
@@ -31,7 +32,7 @@ body{
                     }
                 }
                 .backPanel{
-                    transform: rotateY(180deg);
+                    position: absolute;
                     z-index: -1;
                     border-bottom: solid blue;
                 }
