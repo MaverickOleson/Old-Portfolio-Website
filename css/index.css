@@ -45,6 +45,8 @@ body header nav {
           transform-origin: center;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
+  -webkit-animation: spin1 7.5s infinite linear;
+          animation: spin1 7.5s infinite linear;
 }
 
 body header nav * {
@@ -59,13 +61,12 @@ body header nav * div {
 }
 
 body header nav * .backPanel {
-  z-index: 1;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
 }
 
-body header nav * .frontPanel {
-  z-index: 2;
+body header nav .panel1 {
+  z-index: 0;
 }
 
 body header nav .panel1 .backPanel {
@@ -74,6 +75,10 @@ body header nav .panel1 .backPanel {
 
 body header nav .panel1 .frontPanel {
   border-bottom: solid salmon;
+}
+
+body header nav .panel2 {
+  z-index: -1;
 }
 
 body header nav .panel2 .backPanel {
@@ -85,8 +90,7 @@ body header nav .panel2 .frontPanel {
 }
 
 body header nav .panel3 {
-  -webkit-transform: rotateY(-60deg) rotateX(-30deg);
-          transform: rotateY(-60deg) rotateX(-30deg);
+  z-index: -1;
 }
 
 body header nav .panel3 .backPanel {

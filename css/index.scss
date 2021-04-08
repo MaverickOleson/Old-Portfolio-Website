@@ -23,6 +23,7 @@ body{
             left: 0;
             transform-origin: center;
             transform-style: preserve-3d;
+            animation: spin1 7.5s infinite linear;
             *{ 
                 position: absolute;
                 div{
@@ -34,14 +35,11 @@ body{
                     }
                 }
                 .backPanel{
-                    z-index: 1;
                     transform: rotateY(180deg);
-                }
-                .frontPanel{
-                    z-index: 2;
                 }
             }
             .panel1{
+                z-index: 0;
                 .backPanel{
                     border-bottom: solid blue;
                 }
@@ -50,6 +48,7 @@ body{
                 }
             }
             .panel2{
+                z-index: -1;
                 .backPanel{
                     border-bottom: solid blue;
                 }
@@ -58,7 +57,7 @@ body{
                 }
             }
             .panel3{
-                transform: rotateY(-60deg) rotateX(-30deg);
+                z-index: -1;
                 .backPanel{
                     border-bottom: solid blue;
                 }
