@@ -3,200 +3,144 @@
   color: white;
   text-align: center;
 }
-
-body {
-  background: -webkit-gradient(linear, left top, right top, from(darkviolet), color-stop(blue), to(darkviolet));
+* body {
   background: linear-gradient(to right, darkviolet, blue, darkviolet);
 }
-
-body header {
+* body header {
   background-color: black;
   width: 100%;
   min-height: 18.3vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
   border: 1.15vh double lime;
 }
-
-body header nav {
-  width: 8.13333vh;
-  height: sqrt(pow(8.13333vh, 2)-pow(4.06667vh, 2));
-  -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
-          clip-path: polygon(50% 0, 100% 100%, 0 100%);
+* body header nav {
+  width: 17.023255814vh;
+  height: 14.74257199vh;
   position: fixed;
   top: 0;
   left: 0;
-  margin-top: 18.3vh-sqrt(pow(8.13333vh, 2)-pow(4.06667vh, 2))/2;
-  margin-left: 18.3vh-sqrt(pow(8.13333vh, 2)-pow(4.06667vh, 2))/2;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-animation: spin1 7.5s infinite linear;
-          animation: spin1 7.5s infinite linear;
-  -webkit-transition: -webkit-transform 1s ease-out;
-  transition: -webkit-transform 1s ease-out;
-  transition: transform 1s ease-out;
-  transition: transform 1s ease-out, -webkit-transform 1s ease-out;
+  margin-top: 1.3682415423vh;
+  margin-left: 3.55742801vh;
+  transform-style: preserve-3d;
+  -webkit-animation: spin 12s infinite linear;
+          animation: spin 12s infinite linear;
 }
-
-body header nav:hover {
-  -webkit-transform: scale3d(1.3, 1.3, 1.3);
-          transform: scale3d(1.3, 1.3, 1.3);
-}
-
-body header nav * {
+* body header nav div {
+  width: 17.023255814vh;
+  height: 14.74257199vh;
+  -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
+          clip-path: polygon(50% 0, 100% 100%, 0 100%);
   position: absolute;
+  transform-origin: bottom;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
-
-body header nav * div {
+* body header nav :nth-child(odd) {
+  background-color: blue;
+}
+* body header nav :nth-child(even) {
   background-color: salmon;
 }
-
-body header nav * .backPanel {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
-  background-image: url("/images/Portrait.png");
-  background-attachment: fixed;
+* body header nav .div1B {
+  transform: translateZ(-4.9141906633vh) rotateX(-19.4712206345deg);
 }
-
-body header nav .panel1 {
-  -webkit-transform: rotateX(90deg-asin(sqrt(pow(8.13333vh, 2)-pow(4.06667vh/cos(30deg), 2))/8.13333vh/2));
-          transform: rotateX(90deg-asin(sqrt(pow(8.13333vh, 2)-pow(4.06667vh/cos(30deg), 2))/8.13333vh/2));
+* body header nav .div1F {
+  transform: translateZ(-4.9141906633vh) rotateY(180deg) rotateX(19.4712206345deg);
 }
-
-body header nav .panel2 {
-  -webkit-transform: rotateY(60deg) translateZ(4.06667vh) rotateX(90deg-asin(sqrt(pow(8.13333vh, 2)-pow(4.06667vh/cos(30deg), 2))/8.13333vh/2));
-          transform: rotateY(60deg) translateZ(4.06667vh) rotateX(90deg-asin(sqrt(pow(8.13333vh, 2)-pow(4.06667vh/cos(30deg), 2))/8.13333vh/2));
+* body header nav .div2B {
+  transform-origin: bottom left;
+  transform: translateZ(-4.9141906633vh) rotateY(-60deg) rotateX(19.4712206345deg);
 }
-
-body header nav .panel3 {
-  -webkit-transform: rotateY(300deg) translateZ(-4.06667vh) rotateX(90deg-asin(sqrt(pow(8.13333vh, 2)-pow(4.06667vh/cos(30deg), 2))/8.13333vh/2));
-          transform: rotateY(300deg) translateZ(-4.06667vh) rotateX(90deg-asin(sqrt(pow(8.13333vh, 2)-pow(4.06667vh/cos(30deg), 2))/8.13333vh/2));
+* body header nav .div2F {
+  transform-origin: bottom left;
+  transform: translateZ(-4.9141906633vh) rotateY(300deg) rotateX(19.4712206345deg);
 }
-
-body header nav .panel4 {
-  -webkit-transform: rotateX(90deg);
-          transform: rotateX(90deg);
+* body header nav .div3B {
+  transform-origin: bottom right;
+  transform: translateZ(-4.9141906633vh) rotateY(-300deg) rotateX(19.4712206345deg);
 }
-
-@-webkit-keyframes spin1 {
+* body header nav .div3F {
+  transform-origin: bottom right;
+  transform: translateZ(-4.9141906633vh) rotateY(60deg) rotateX(19.4712206345deg);
+}
+* body header nav .div4B {
+  transform-origin: bottom;
+  transform: translateZ(-4.9141906633vh) rotateY(180deg) rotateX(90deg);
+}
+* body header nav .div4F {
+  transform-origin: bottom;
+  transform: translateZ(-4.9141906633vh) rotateX(-90deg);
+}
+@-webkit-keyframes spin {
   0% {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  }
-  50% {
-    -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg);
+    transform: rotateX(0deg) rotatey(60deg) rotateZ(0deg);
   }
   100% {
-    -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
+    transform: rotateX(360deg) rotateY(780deg) rotateZ(360deg);
   }
 }
-
-@keyframes spin1 {
+@keyframes spin {
   0% {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  }
-  50% {
-    -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg);
+    transform: rotateX(0deg) rotatey(60deg) rotateZ(0deg);
   }
   100% {
-    -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
+    transform: rotateX(360deg) rotateY(780deg) rotateZ(360deg);
   }
 }
-
-body header h1 {
+* body header h1 {
   font-size: 3.4vw;
   -webkit-text-decoration: underline 0.3vh;
           text-decoration: underline 0.3vh;
 }
-
-body main {
+* body main {
   width: 100%;
 }
-
-body main .row {
+* body main .row {
   width: 100%;
   height: 81.7vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 }
-
-body main .row .mainText {
+* body main .row .mainText {
   font-size: 2.3vw;
   line-height: 3vw;
   max-width: 45%;
   max-height: 95%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background-color: black;
   border: 1.15vh double fuchsia;
 }
-
-body main .row #image1 {
+* body main .row #image1 {
   max-width: 50%;
   max-height: 95%;
   margin: auto 0 auto;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border: 1.15vh solid black;
   border-radius: 10% 10% 10% 10%;
 }
-
-body main .row #image2 {
+* body main .row #image2 {
   height: 75%;
   margin: auto 0 auto;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border: 1.15vh solid black;
   border-radius: 10% 10% 10% 10%;
 }
-
-body footer {
+* body footer {
   background-color: darkblue;
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
   border: 1.15vh double lime;
 }
 
@@ -237,5 +181,4 @@ Resources for animation test:
 #p-place{
     margin: 0;
     visibility: hidden;
-}*/
-/*# sourceMappingURL=index.css.map */
+}*//*# sourceMappingURL=index.css.map */
