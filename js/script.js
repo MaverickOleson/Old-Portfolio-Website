@@ -17,7 +17,7 @@ $(function() {
     //$('header nav * .frontPanel').animate({transform: 'rotateY(90deg)'}, 3000);
     //$('header nav * .backPanel').css('animation', 'spin2 7.5s infinite ease-in-out');
     //$('header nav * div *').css('transform', 'translateX(' + Number($('header nav * div').css('border-right-width').split('px')[0]) - $('header nav * div *').width() / 2 + ')')
-    //$('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
+    $('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
 });
 /*$(window).resize(function() {
     $('header h1').css({'margin-top': $('header h1').height() / 8, 'margin-bottom': $('header h1').height() / 8});

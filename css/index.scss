@@ -3,7 +3,9 @@ $fullWidth: 100%;
 $headerHeight: 18.3vh;
 $panelWidth: $headerHeight / 4.3 * 4;
 $panelHeight: $panelWidth * math.sin(60deg);
-//@extend vs $
+$titleFontSize: 58px;
+$mainTextFontSize: 50px;
+$mainTextLineHeight: 57px;
 @mixin flexRow {
     display: flex;
     flex-direction: row;
@@ -22,7 +24,7 @@ $panelHeight: $panelWidth * math.sin(60deg);
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            border: 1.15vh double lime;
+            border: 1.15vh double cyan;
             nav{
                 width: $panelWidth;
                 height: $panelHeight;
@@ -38,25 +40,35 @@ $panelHeight: $panelWidth * math.sin(60deg);
                 }
                 //transform-origin: center;
                 transform-style: preserve-3d;
-                animation: spin 12s infinite linear;
+                animation: spin 18s infinite linear;
+                :nth-child(odd):not(div *){
+                    background-color: blue;
+                }
+                :nth-child(even):not(div *){
+                    background-color: salmon;
+                }
                 div{
                     width: $panelWidth;
                     height: $panelHeight;
                     clip-path: polygon(50% 0, 100% 100%, 0 100%);
                     position: absolute;
-                    transform-origin: bottom;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     backface-visibility: hidden;
-                }
-                :nth-child(odd){
-                    background-color: blue;
-                }
-                :nth-child(even){
-                    background-color: salmon;
+                    *{
+                        background-color: transparent;
+                    }
+                    h2{
+                        margin-top: 2em;
+                    }
                 }
                 .div1B{
+                    transform-origin: bottom;
                     transform: translateZ($panelTranslateZ) rotateX($panelRotateX);
                 }
                 .div1F{
+                    transform-origin: bottom;
                     transform: translateZ($panelTranslateZ) rotateY(180deg) rotateX(-$panelRotateX);
                 }
                 .div2B{
@@ -84,28 +96,39 @@ $panelHeight: $panelWidth * math.sin(60deg);
                     transform: translateZ($panelTranslateZ) rotateX(-90deg);
                 }
                 @keyframes spin{
-                    0% {transform: rotateX(0deg) rotatey(60deg) rotateZ(0deg)}
-                    100% {transform: rotateX(360deg) rotateY(780deg) rotateZ(360deg)}
+                    0% {transform: rotateX(0deg) rotatey(180deg) rotateZ(0deg)}
+                    100% {transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg)}
                 }
             }
-            h1{
-                font-size: 3.4vw;
+            h1.title{
+                font-size: $titleFontSize;
                 text-decoration: underline 0.3vh;
+                padding: {
+                    right: $titleFontSize;
+                    left: $titleFontSize;
+                }
+                margin: {
+                    top: $headerHeight / 13;
+                    bottom: $headerHeight / 13;
+                }
+                border: 1.3vh solid lime;
+                border-radius: $titleFontSize * 1.5;
             }
         }
-        main{
+        main{//1070w
             width: $fullWidth;
             .row{
                 width: $fullWidth;
-                height: 100vh - $headerHeight;
+                height: calc(100vh - 13rem);
                 @include flexRow();
                 align-items: center;
                 justify-content: space-evenly;
                 .mainText{
-                    font-size: 2.3vw;
-                    line-height: 3vw;
+                    font-size: $mainTextFontSize;
+                    line-height: $mainTextLineHeight;
+                    width: fit-content;
+                    height: fit-content;
                     max-width: 45%;
-                    max-height: 95%;
                     box-sizing: border-box;
                     background-color: black;
                     border: 1.15vh double fuchsia;
@@ -115,22 +138,23 @@ $panelHeight: $panelWidth * math.sin(60deg);
                     max-height: 95%;
                     margin: auto 0 auto;
                     box-sizing: border-box;
-                    border: 1.15vh solid black;
-                    border-radius: 10% 10% 10% 10%;
+                    border: 1.15vh double lime;
+                    border-radius: 16% 16% 12% 12%;
                 }
                 #image2{
                     height: 75%;
                     margin: auto 0 auto;
                     box-sizing: border-box;
-                    border: 1.15vh solid black;
-                    border-radius: 10% 10% 10% 10%;
+                    border: 1.15vh double lime;
+                    border-radius: 16% 16% 12% 12%;
                 }
             }
         }
         footer{
             background-color: darkblue;
-            width: $fullWidth;;
+            width: $fullWidth;
             height: fit-content;
+            font-size: 2.3rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
