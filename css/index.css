@@ -9,7 +9,7 @@
 * body header {
   background-color: black;
   width: 100%;
-  min-height: 18.3vh;
+  min-height: 19.2vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -18,72 +18,55 @@
   border: 1.15vh double cyan;
 }
 * body header nav {
-  width: 17.023255814vh;
-  height: 14.74257199vh;
+  width: 16.6143861547vh;
+  height: 17.8604651163vh;
   position: fixed;
   top: 0;
   left: 0;
-  margin-top: 1.3682415423vh;
-  margin-left: 3.55742801vh;
+  margin-top: 0.9252922157vh;
+  margin-left: 2.4057597609vh;
+}
+* body header nav .tetrahedron {
+  width: 16.6143861547vh;
+  height: 14.3884804782vh;
   transform-style: preserve-3d;
-  -webkit-animation: spin 18s infinite linear;
-          animation: spin 18s infinite linear;
+  transform: rotateY(180deg);
 }
-* body header nav :nth-child(odd):not(div *) {
-  background-color: blue;
-}
-* body header nav :nth-child(even):not(div *) {
+* body header nav .tetrahedron div {
+  width: 16.6143861547vh;
+  height: 14.3884804782vh;
   background-color: salmon;
-}
-* body header nav div {
-  width: 17.023255814vh;
-  height: 14.74257199vh;
   -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
           clip-path: polygon(50% 0, 100% 100%, 0 100%);
   position: absolute;
+  overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
-* body header nav div * {
+* body header nav .tetrahedron div * {
   background-color: transparent;
 }
-* body header nav div h2 {
+* body header nav .tetrahedron div h2 {
   margin-top: 2em;
 }
-* body header nav .div1B {
+* body header nav .tetrahedron .div1 {
   transform-origin: bottom;
-  transform: translateZ(-4.9141906633vh) rotateX(-19.4712206345deg);
+  transform: translateZ(-4.7961601594vh) rotateY(180deg) rotateX(19.4712206345deg);
 }
-* body header nav .div1F {
-  transform-origin: bottom;
-  transform: translateZ(-4.9141906633vh) rotateY(180deg) rotateX(19.4712206345deg);
-}
-* body header nav .div2B {
+* body header nav .tetrahedron .div2 {
   transform-origin: bottom left;
-  transform: translateZ(-4.9141906633vh) rotateY(-60deg) rotateX(19.4712206345deg);
+  transform: translateZ(-4.7961601594vh) rotateY(300deg) rotateX(19.4712206345deg);
 }
-* body header nav .div2F {
-  transform-origin: bottom left;
-  transform: translateZ(-4.9141906633vh) rotateY(300deg) rotateX(19.4712206345deg);
-}
-* body header nav .div3B {
+* body header nav .tetrahedron .div3 {
   transform-origin: bottom right;
-  transform: translateZ(-4.9141906633vh) rotateY(-300deg) rotateX(19.4712206345deg);
+  transform: translateZ(-4.7961601594vh) rotateY(60deg) rotateX(19.4712206345deg);
 }
-* body header nav .div3F {
-  transform-origin: bottom right;
-  transform: translateZ(-4.9141906633vh) rotateY(60deg) rotateX(19.4712206345deg);
-}
-* body header nav .div4B {
+* body header nav .tetrahedron .div4 {
   transform-origin: bottom;
-  transform: translateZ(-4.9141906633vh) rotateY(180deg) rotateX(90deg);
-}
-* body header nav .div4F {
-  transform-origin: bottom;
-  transform: translateZ(-4.9141906633vh) rotateX(-90deg);
+  transform: translateZ(-4.7961601594vh) rotateX(-90deg);
 }
 @-webkit-keyframes spin {
   0% {
@@ -101,16 +84,40 @@
     transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg);
   }
 }
+* body header nav .dotDiv {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+* body header nav .dotDiv .dot {
+  cursor: pointer;
+  height: 17px;
+  width: 17px;
+  margin: 0 3px;
+  background-color: #eaeaea;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+* body header nav .dotDiv .active, * body header nav .dotDiv .dot:hover {
+  background-color: #818181;
+}
 * body header h1.title {
-  font-size: 58px;
+  font-size: 48px;
   -webkit-text-decoration: underline 0.3vh;
           text-decoration: underline 0.3vh;
-  padding-right: 58px;
-  padding-left: 58px;
-  margin-top: 1.4076923077vh;
-  margin-bottom: 1.4076923077vh;
+  padding-right: 48px;
+  padding-left: 48px;
+  margin-top: 1.4769230769vh;
+  margin-bottom: 1.4769230769vh;
   border: 1.3vh solid lime;
-  border-radius: 87px;
+  border-radius: 72px;
 }
 * body main {
   width: 100%;
@@ -133,13 +140,14 @@
   height: -moz-fit-content;
   height: fit-content;
   max-width: 45%;
+  max-height: 95%;
+  overflow-y: auto;
   box-sizing: border-box;
   background-color: black;
   border: 1.15vh double fuchsia;
 }
 * body main .row #image1 {
-  max-width: 50%;
-  max-height: 95%;
+  height: 95%;
   margin: auto 0 auto;
   box-sizing: border-box;
   border: 1.15vh double lime;

@@ -1,4 +1,14 @@
 $(function() {
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        slideIndex++;
+        if (slideIndex > 2) slideIndex = 1;
+        alert($('nav .dotDiv .dot')[0])
+        if(slideIndex == 1) $('nav .dotDiv .dot')[0].addClass('active');
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
     var navRotationY = 0;
     function navRotateY() {
         $('nav .tetrahedron').animate({rotation: 120 * navRotationY}, {
