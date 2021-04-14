@@ -1,5 +1,17 @@
 $(function() {
-    
+    var navRotationY = 0;
+    function navRotateY() {
+        $('nav .tetrahedron').animate({rotation: 120 * navRotationY}, {
+            duration: 1000,
+            step: function(now) {
+                $(this).css('transform','rotateY(' + now + 'deg)'); 
+            },
+            easing: 'linear'
+        });
+        navRotationY++;
+        if(navRotationY == 3) navRotationY = 0;
+    }
+    $('nav .forward').on('click', navRotateY());
     //alert(90 - Math.asin(Math.sqrt(Math.pow($('.panel1 .frontPanel').width(), 2) - Math.pow($('.panel1 .frontPanel').width() / 2 / Math.cos(30), 2)) / Math.sqrt(Math.pow($('.panel1 .frontPanel').width(),2) - Math.pow($('.panel1 .frontPanel').width() / 2,2))));
     //$('header nav * div').css({'border-right-width': $('header').height() / 4.5 * 2,'border-left-width': $('header').height() / 4.5 * 2});
     //$('header nav * div').css('border-bottom-width', Math.sqrt(Math.pow(Number($('header nav * div').css('border-right-width').split('px')[0]), 2) * 4 - Math.pow(Number($('header nav * div').css('border-right-width').split('px')[0]), 2)));
