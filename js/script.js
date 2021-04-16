@@ -1,27 +1,47 @@
 $(function() {
-    var slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        slideIndex++;
-        if (slideIndex > 2) slideIndex = 1;
-        alert($('nav .dotDiv .dot')[0])
-        if(slideIndex == 1) $('nav .dotDiv .dot')[0].addClass('active');
-        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    var yRotation = 0;
+    var dotRotation = 0;
+    var spin = setInterval(function() {
+        $('nav .dotDiv .dot').eq(dotRotation).removeClass('active');
+        yRotation++;
+        dotRotation++;
+        if(yRotation > 3) yRotation = 1;
+        if(dotRotation > 2) dotRotation = 0;
+        $('nav .dotDiv .dot').eq(dotRotation).addClass('active');
+        if(yRotation == 1) $('nav .tetrahedron').css('animation', 'spinR1 1s linear forwards');
+        if(yRotation == 2) $('nav .tetrahedron').css('animation', 'spinR2 1s linear forwards');
+        if(yRotation == 3) $('nav .tetrahedron').css('animation', 'spinR3 1s linear forwards');
+    }, 3000);
+    function yRotateTo(dot, yRotation, rotateTo){
+        if(yRotation == 1 && dot == 0){
+            rotateTo = 0;
+            alert('ues')
+        }
     }
-    var navRotationY = 0;
-    function navRotateY() {
-        $('nav .tetrahedron').animate({rotation: 120 * navRotationY}, {
+    function rotateY(rotateTo){
+        $('nav .tetrahedron').animate({rotation: rotateTo}, {
             duration: 1000,
             step: function(now) {
-                $(this).css('transform','rotateY(' + now + 'deg)'); 
+                $(this).css('transform', 'rotateY(' + now + 'deg)'); 
             },
             easing: 'linear'
         });
-        navRotationY++;
-        if(navRotationY == 3) navRotationY = 0;
     }
-    $('nav .forward').on('click', navRotateY());
+    $('nav .dotDiv .dot').eq(0).on('click', function(){
+        clearInterval(spin);
+        $(this).parent().find('.active').removeClass('active');
+        $(this).addClass('active');
+        var rotateTo;
+        yRotateTo(0, yRotation, rotateTo);
+        alert(rotateTo)
+        rotateY(rotateTo);
+    });
+    $('nav .dotDiv .dot').eq(1).on('click', function(){
+        clearInterval(spin);
+        var rotateTo;
+        yRotateTo(0, yRotation, rotateTo);
+        rotateY(rotateTo);
+    });
     //alert(90 - Math.asin(Math.sqrt(Math.pow($('.panel1 .frontPanel').width(), 2) - Math.pow($('.panel1 .frontPanel').width() / 2 / Math.cos(30), 2)) / Math.sqrt(Math.pow($('.panel1 .frontPanel').width(),2) - Math.pow($('.panel1 .frontPanel').width() / 2,2))));
     //$('header nav * div').css({'border-right-width': $('header').height() / 4.5 * 2,'border-left-width': $('header').height() / 4.5 * 2});
     //$('header nav * div').css('border-bottom-width', Math.sqrt(Math.pow(Number($('header nav * div').css('border-right-width').split('px')[0]), 2) * 4 - Math.pow(Number($('header nav * div').css('border-right-width').split('px')[0]), 2)));
