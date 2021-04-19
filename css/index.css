@@ -1,3 +1,28 @@
+@media screen and (orientation: landscape) and (min-width: 1920px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media screen and (orientation: landscape) and (max-width: 1919px) {
+  html {
+    font-size: 15px;
+  }
+}
+@media screen and (orientation: landscape) and (max-width: 1328px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media screen and (orientation: portrait) and (max-height: 1366px) {
+  html {
+    font-size: 19px;
+  }
+}
+@media screen and (orientation: portrait) and (max-height: 1366px) {
+  html {
+    font-size: 19px;
+  }
+}
 * {
   margin: 0;
   color: white;
@@ -12,6 +37,7 @@
   min-height: 19.2vh;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -67,72 +93,100 @@
   transform-origin: bottom;
   transform: rotateY(120deg) translateZ(-4.7961601594vh) rotateX(-19.4712206345deg);
 }
-* body header nav .tetrahedron .div4 {
-  transform-origin: bottom;
-  transform: translateZ(-4.7961601594vh) rotateX(-90deg);
-}
-@-webkit-keyframes spinR1 {
+@-webkit-keyframes spin1 {
   0% {
-    transform: rotatey(0deg);
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-120deg);
+  }
+}
+@keyframes spin1 {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-120deg);
+  }
+}
+@-webkit-keyframes spin2 {
+  0% {
+    transform: rotateY(0deg);
   }
   100% {
     transform: rotateY(120deg);
   }
 }
-@keyframes spinR1 {
+@keyframes spin2 {
   0% {
-    transform: rotatey(0deg);
+    transform: rotateY(0deg);
   }
   100% {
     transform: rotateY(120deg);
   }
 }
-@-webkit-keyframes spinR2 {
+@-webkit-keyframes spin3 {
   0% {
-    transform: rotatey(120deg);
+    transform: rotateY(-120deg);
   }
   100% {
-    transform: rotateY(240deg);
+    transform: rotateY(-240deg);
   }
 }
-@keyframes spinR2 {
+@keyframes spin3 {
   0% {
-    transform: rotatey(120deg);
+    transform: rotateY(-120deg);
   }
   100% {
-    transform: rotateY(240deg);
+    transform: rotateY(-240deg);
   }
 }
-@-webkit-keyframes spinR3 {
+@-webkit-keyframes spin4 {
   0% {
-    transform: rotatey(240deg);
+    transform: rotateY(-120deg);
   }
   100% {
-    transform: rotateY(360deg);
+    transform: rotateY(0deg);
   }
 }
-@keyframes spinR3 {
+@keyframes spin4 {
   0% {
-    transform: rotatey(240deg);
+    transform: rotateY(-120deg);
   }
   100% {
-    transform: rotateY(360deg);
+    transform: rotateY(0deg);
   }
 }
-@-webkit-keyframes spinR4 {
+@-webkit-keyframes spin5 {
   0% {
-    transform: rotatey(0deg);
+    transform: rotateY(-240deg);
   }
   100% {
-    transform: rotateY(120deg);
+    transform: rotateY(-360deg);
   }
 }
-@keyframes spinR4 {
+@keyframes spin5 {
   0% {
-    transform: rotatey(0deg);
+    transform: rotateY(-240deg);
   }
   100% {
-    transform: rotateY(120deg);
+    transform: rotateY(-360deg);
+  }
+}
+@-webkit-keyframes spin6 {
+  0% {
+    transform: rotateY(-240deg);
+  }
+  100% {
+    transform: rotateY(-120deg);
+  }
+}
+@keyframes spin6 {
+  0% {
+    transform: rotateY(-240deg);
+  }
+  100% {
+    transform: rotateY(-120deg);
   }
 }
 * body header nav .dotDiv {
@@ -160,15 +214,15 @@
   background-color: #616161;
 }
 * body header h1.title {
-  font-size: 48px;
+  font-size: 3rem;
   -webkit-text-decoration: underline 0.3vh;
           text-decoration: underline 0.3vh;
-  padding-right: 48px;
-  padding-left: 48px;
+  padding-right: 3rem;
+  padding-left: 3rem;
   margin-top: 1.4769230769vh;
   margin-bottom: 1.4769230769vh;
   border: 1.3vh solid lime;
-  border-radius: 72px;
+  border-radius: 4.5rem;
 }
 * body main {
   width: 100%;
@@ -178,39 +232,63 @@
   height: 20.8vh;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
 }
 * body main .row .mainText {
-  font-size: 50px;
-  line-height: 57px;
+  font-size: 3.1rem;
+  line-height: 3.6rem;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  max-width: 45%;
-  max-height: 95%;
   overflow-y: auto;
   box-sizing: border-box;
   background-color: black;
   border: 1.15vh double fuchsia;
-  box-shadow: rgba(240, 46, 170, 0.4) -0.3vmax 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+  box-shadow: rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin;
+}
+@media screen and (orientation: landscape) {
+  * body main .row .mainText {
+    max-width: 45%;
+    max-height: 95%;
+    margin-right: 1.1rem;
+  }
+}
+@media screen and (orientation: portrait) {
+  * body main .row .mainText {
+    max-width: 84%;
+    height: 45%;
+  }
+}
+* body main .row .mainText p {
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
 }
 * body main .row img {
-  box-shadow: rgba(0, 240, 0, 0.4) -5px 5px, rgba(0, 240, 0, 0.3) -10px 10px, rgba(0, 240, 0, 0.2) -15px 15px, rgba(0, 240, 0, 0.1) -20px 20px, rgba(0, 240, 0, 0.05) -25px 25px;
+  box-shadow: rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin;
+}
+@media screen and (orientation: landscape) {
+  * body main .row img {
+    height: 45.9rem;
+    margin: auto 1.1rem auto;
+  }
+}
+@media screen and (orientation: portrait) {
+  * body main .row img {
+    max-height: 45%;
+    margin: auto none auto;
+  }
 }
 * body main .row #image1 {
-  height: 735.08px;
-  margin: auto 0 auto;
   box-sizing: border-box;
   border: 1.15vh double lime;
   border-radius: 16% 16% 12% 12%;
 }
 * body main .row #image2 {
-  height: 624.818px;
-  margin: auto 0 auto;
   box-sizing: border-box;
   border: 1.15vh double lime;
   border-radius: 16% 16% 12% 12%;
@@ -221,7 +299,7 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  font-size: 37px;
+  font-size: 2.3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

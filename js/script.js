@@ -8,40 +8,53 @@ $(function() {
         if(yRotation > 3) yRotation = 1;
         if(dotRotation > 2) dotRotation = 0;
         $('nav .dotDiv .dot').eq(dotRotation).addClass('active');
-        if(yRotation == 1) $('nav .tetrahedron').css('animation', 'spinR1 1s linear forwards');
-        if(yRotation == 2) $('nav .tetrahedron').css('animation', 'spinR2 1s linear forwards');
-        if(yRotation == 3) $('nav .tetrahedron').css('animation', 'spinR3 1s linear forwards');
-    }, 3000);
-    function yRotateTo(dot, yRotation, rotateTo){
-        if(yRotation == 1 && dot == 0){
-            rotateTo = 0;
-            alert('ues')
+        if(yRotation == 1) $('nav .tetrahedron').css('animation', 'spin1 1s linear forwards');
+        if(yRotation == 2) $('nav .tetrahedron').css('animation', 'spin3 1s linear forwards');
+        if(yRotation == 3) $('nav .tetrahedron').css('animation', 'spin5 1s linear forwards');
+    }, 5000);
+    function yRotateTo(rotateTo){
+        if(rotateTo - 1 == yRotation){
+            rotateY(rotateTo * 2 - 1);
+            yRotation = rotateTo;
+        }
+        if(rotateTo + 1 == yRotation){
+            rotateY((rotateTo + 2) * 2);
+            yRotation = rotateTo;
+        }
+        if(rotateTo - 2 == yRotation){
+            rotateY(2);
+            yRotation = rotateTo;
+        }
+        if(rotateTo + 2 == yRotation){
+            rotateY(5);
+            yRotation = rotateTo;
         }
     }
     function rotateY(rotateTo){
-        $('nav .tetrahedron').animate({rotation: rotateTo}, {
-            duration: 1000,
-            step: function(now) {
-                $(this).css('transform', 'rotateY(' + now + 'deg)'); 
-            },
-            easing: 'linear'
-        });
+        $('nav .tetrahedron').css('animation', 'spin' + rotateTo + ' 1s linear forwards');
     }
     $('nav .dotDiv .dot').eq(0).on('click', function(){
         clearInterval(spin);
         $(this).parent().find('.active').removeClass('active');
         $(this).addClass('active');
-        var rotateTo;
-        yRotateTo(0, yRotation, rotateTo);
-        alert(rotateTo)
-        rotateY(rotateTo);
+        yRotateTo(0);
     });
     $('nav .dotDiv .dot').eq(1).on('click', function(){
         clearInterval(spin);
-        var rotateTo;
-        yRotateTo(0, yRotation, rotateTo);
-        rotateY(rotateTo);
+        $(this).parent().find('.active').removeClass('active');
+        $(this).addClass('active');
+        yRotateTo(1);
     });
+    $('nav .dotDiv .dot').eq(2).on('click', function(){
+        clearInterval(spin);
+        $(this).parent().find('.active').removeClass('active');
+        $(this).addClass('active');
+        yRotateTo(2);
+    });
+    if($(window).width() > $(window).height()) $('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
+    else{
+        $('main .row').css('height', 'calc((100vh - ' + $('header').outerHeight() + 'px) * 2)');
+    }
     //alert(90 - Math.asin(Math.sqrt(Math.pow($('.panel1 .frontPanel').width(), 2) - Math.pow($('.panel1 .frontPanel').width() / 2 / Math.cos(30), 2)) / Math.sqrt(Math.pow($('.panel1 .frontPanel').width(),2) - Math.pow($('.panel1 .frontPanel').width() / 2,2))));
     //$('header nav * div').css({'border-right-width': $('header').height() / 4.5 * 2,'border-left-width': $('header').height() / 4.5 * 2});
     //$('header nav * div').css('border-bottom-width', Math.sqrt(Math.pow(Number($('header nav * div').css('border-right-width').split('px')[0]), 2) * 4 - Math.pow(Number($('header nav * div').css('border-right-width').split('px')[0]), 2)));
@@ -59,17 +72,20 @@ $(function() {
     //$('header nav * .frontPanel').animate({transform: 'rotateY(90deg)'}, 3000);
     //$('header nav * .backPanel').css('animation', 'spin2 7.5s infinite ease-in-out');
     //$('header nav * div *').css('transform', 'translateX(' + Number($('header nav * div').css('border-right-width').split('px')[0]) - $('header nav * div *').width() / 2 + ')')
-    $('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
 });
-/*$(window).resize(function() {
-    $('header h1').css({'margin-top': $('header h1').height() / 8, 'margin-bottom': $('header h1').height() / 8});
+$(window).resize(function() {
+    if($(window).width() > $(window).height()) $('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
+    else{
+        $('main .row').css('height', 'calc((100vh - ' + $('header').outerHeight() + 'px) * 2)');
+    }
+    /*$('header h1').css({'margin-top': $('header h1').height() / 8, 'margin-bottom': $('header h1').height() / 8});
     $('header nav *').css({'border-right-width': $('header').height() / 4.5 * 2,'border-left-width': $('header').height() / 4.5 * 2});
     $('header nav').css('margin-top', ($('header').outerHeight() - Math.tan(60 * Math.PI / 180) * Number($('header nav *').css('border-right-width').split('px')[0])) / 2);
     $('header nav').css('margin-left', $('header nav').css('margin-top'));
     $('nav .panel1').css('border-bottom', '' + Math.sqrt(Math.pow(Number($('nav .panel1').css('border-right-width').split('px')[0]), 2) * 4 - Math.pow(Number($('nav .panel1').css('border-right-width').split('px')[0]), 2)) + 'px solid salmon');
     $('nav .panel1 .frontPanel *').css({'left': $('nav').width() / 2 - $('nav .panel1 .frontPanel *').width() / 2, 'top': Math.tan(60 * Math.PI / 180) * Number($('header nav *').css('border-right-width').split('px')[0]) / 2});
-    $('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');
-})*/
+    $('main .row').css('height', 'calc(100vh - ' + $('header').outerHeight() + 'px)');*/
+})
 
 /*
 Function to animate/reposition elements from navigation to body:
