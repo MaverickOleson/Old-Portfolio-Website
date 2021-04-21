@@ -1,7 +1,7 @@
 @use 'sass:math';
 @use 'sass:list';
 $fullWidth: 100%;
-@media screen and (orientation:landscape) {
+/*@media screen and (orientation:landscape) {
     @media screen and (min-width: 1920px) {
         html{
             font-size: 16px;
@@ -29,16 +29,11 @@ $fullWidth: 100%;
             font-size: 19px;
         }
     }
-}
-$headerHeight: 19.2vh;
+}*/
+$headerHeight: 17.8vh;
 $navHeight: $headerHeight / 4.3 * 4;
 $panelWidth: $navHeight / 4.3 * 4;
 $panelHeight: $panelWidth * math.sin(60deg);
-$titleFontSize: 3rem;
-$mainTextFontSize: 3.1rem;
-$mainTextLineHeight: 3.6rem;
-$imageHeight: 45.9rem;
-$footerFontSize: 2.3rem;
 @mixin flexRow {
     display: flex;
     flex-direction: row;
@@ -53,7 +48,7 @@ $footerFontSize: 2.3rem;
         header{
             background-color: black;
             width: $fullWidth;
-            min-height: $headerHeight;
+            height: $headerHeight;
             @include flexRow();
             justify-content: center;
             align-items: center;
@@ -66,10 +61,10 @@ $footerFontSize: 2.3rem;
                 top: 0;
                 left: 0;
                 $navMargin: ($headerHeight - $panelHeight) / 2;
-                    margin: {
-                        top: $navMargin / 2.6;
-                        left: $navMargin;
-                    }
+                margin: {
+                    top: $navMargin - 1.6vh;
+                    left: $navMargin;
+                }
                 .tetrahedron{
                     width: $panelWidth;
                     height: $panelHeight;
@@ -91,8 +86,8 @@ $footerFontSize: 2.3rem;
                         *{
                             background-color: transparent;
                         }
-                        h2{
-                            margin-top: 2em;
+                        a{
+                            margin-top: 25%;
                         }
                     }
                     .div1{
@@ -107,10 +102,6 @@ $footerFontSize: 2.3rem;
                         transform-origin: bottom;
                         transform: rotateY(120deg) translateZ($panelTranslateZ) rotateX($panelRotateX);
                     }
-                    /*@keyframes spin{
-                        0% {transform: rotateX(0deg) rotatey(180deg) rotateZ(0deg)}
-                        100% {transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg)}
-                    }*/
                     $spins: ();
                     @for $i from 0 to 3{
                         $spins: append($spins, ($i * -120deg, ($i + 1) * -120deg));
@@ -124,21 +115,21 @@ $footerFontSize: 2.3rem;
                     }
                 }
                 .dotDiv{
-                    width: fit-content;
-                    height: fit-content;
-                    margin: {
-                        top: 5px;
-                        left: auto;
-                        right: auto;
-                    }
+                    width: $panelWidth;
+                    height: 2.8vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     .dot {
                         cursor: pointer;
-                        height: 17px;
-                        width: 17px;
-                        margin: 0 4px;
+                        height: 1.9vh;
+                        width: 1.9vh;
                         background-color: #ffffff;
-                        border-radius: 50%;
-                        display: inline-block;
+                        margin: {
+                            right: 8px;
+                            left: 8px;
+                        }
+                        border-radius: 100%;
                         transition: background-color 0.6s ease;
                     }
                     .active {
@@ -147,42 +138,40 @@ $footerFontSize: 2.3rem;
                 }
                   
             }
-            h1.title{
-                font-size: $titleFontSize;
+            .title{
                 text-decoration: underline 0.3vh;
+                border: 1.2vh solid lime;
+                border-radius: 11vh;
                 padding: {
-                    right: $titleFontSize;
-                    left: $titleFontSize;
+                    left: 2.4%;
+                    right: 2.4%;
                 }
                 margin: {
-                    top: $headerHeight / 13;
-                    bottom: $headerHeight / 13;
+                    top : 1vh;
+                    bottom : 1vh;
                 }
-                border: 1.3vh solid lime;
-                border-radius: $titleFontSize * 1.5;
             }
         }
-        main{//1070w
+        main{
             width: $fullWidth;
             .row{
                 width: $fullWidth;
-                height: 20.8vh;
+                @media screen and (orientation:landscape) {
+                    height: 82.2vh;
+                }
+                @media screen and (orientation:portrait) {
+                    height: 164.4vh;
+                }
                 @include flexRow();
                 align-items: center;
                 justify-content: space-evenly;
-                $rowItemMargin: 1.1rem;
-                .mainText{
-                    font-size: $mainTextFontSize;
-                    line-height: $mainTextLineHeight;
-                    width: fit-content;
-                    height: fit-content;
+                .textBox{
                     @media screen and (orientation:landscape) {
-                        max-width: 45%;
-                        max-height: 95%;
-                        margin-right: $rowItemMargin;
+                        width: 45%;
+                        height: 95%;
                     }
                     @media screen and (orientation:portrait) {
-                        max-width: 84%;
+                        width: 84%;
                         height: 45%;
                     }
                     overflow-y: auto;
@@ -192,19 +181,17 @@ $footerFontSize: 2.3rem;
                     box-shadow: rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin;
                     p{
                         margin: {
-                            right: 0.3rem;
-                            left: 0.3rem;
+                            right: 0.5vw;
+                            left: 0.5vw;
                         }
                     }
                 }
                 img{
                     @media screen and (orientation:landscape) {
-                        height: $imageHeight;
-                        margin: auto $rowItemMargin auto;
+                        height: 95%;
                     }
                     @media screen and (orientation:portrait) {
-                        max-height: 45%;
-                        margin: auto none auto;
+                        height: 45%;
                     }
                     box-shadow: rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin;
                 }
@@ -221,15 +208,14 @@ $footerFontSize: 2.3rem;
             }
         }
         footer{
-            background-color: darkblue;
+            background-color: black;
             width: $fullWidth;
-            height: fit-content;
-            font-size: $footerFontSize;
+            height: 11.5vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             box-sizing: border-box;
-            border: 1.15vh double lime;
+            border: 1.15vh double gold;
         }
     }
 }

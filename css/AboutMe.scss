@@ -1,0 +1,53 @@
+body{
+    background: none;
+    background-color: #FF8000;
+    header{
+        position: relative;
+        border-color: magenta;
+        outline: 0.4vh solid black;
+        nav{
+            .tetrahedron{
+                div{
+                    background-color: magenta;
+                }
+            }
+        }
+        .title{
+            border-color: cyan;
+        }
+    }
+    main{
+        .row:nth-of-type(1){
+            height: 82.2vh;
+            div{
+                height: 100%;
+                img{
+                    @media screen and (orientation:landscape) {
+                        height: 75%;
+                    }
+                    @media screen and (orientation:portrait) {
+                        height: 70%;
+                    }
+                    border: 2.17vh double cyan;
+                    margin-top: 3vh;
+                    box-shadow: none;
+                }
+                h2{
+                    font-size: 1.8vw;
+                }
+            }
+        }
+        .row{
+            height: fit-content;
+            flex-direction: column;
+            justify-content: unset;
+            h1{
+                text-decoration: underline;
+            }
+            .mainText{
+                width: 85%;
+                margin-top: 1.4vh;
+            }
+        }
+    }
+}

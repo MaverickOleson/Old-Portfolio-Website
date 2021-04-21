@@ -1,28 +1,32 @@
-@media screen and (orientation: landscape) and (min-width: 1920px) {
-  html {
-    font-size: 16px;
-  }
+/*@media screen and (orientation:landscape) {
+    @media screen and (min-width: 1920px) {
+        html{
+            font-size: 16px;
+        }
+    }
+    @media screen and (max-width: 1919px) {
+        html{
+            font-size: 15px;
+        }
+    }
+    @media screen and (max-width: 1328px) {
+        html{
+            font-size: 14px;
+        }
+    }
 }
-@media screen and (orientation: landscape) and (max-width: 1919px) {
-  html {
-    font-size: 15px;
-  }
-}
-@media screen and (orientation: landscape) and (max-width: 1328px) {
-  html {
-    font-size: 14px;
-  }
-}
-@media screen and (orientation: portrait) and (max-height: 1366px) {
-  html {
-    font-size: 19px;
-  }
-}
-@media screen and (orientation: portrait) and (max-height: 1366px) {
-  html {
-    font-size: 19px;
-  }
-}
+@media screen and (orientation:portrait) {
+    @media screen and (max-height: 1366px) {
+        html{
+            font-size: 19px;
+        }
+    }
+    @media screen and (max-height: 1366px) {
+        html{
+            font-size: 19px;
+        }
+    }
+}*/
 * {
   margin: 0;
   color: white;
@@ -34,7 +38,7 @@
 * body header {
   background-color: black;
   width: 100%;
-  min-height: 19.2vh;
+  height: 17.8vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -44,26 +48,22 @@
   border: 1.15vh double cyan;
 }
 * body header nav {
-  width: 16.6143861547vh;
-  height: 17.8604651163vh;
+  width: 15.4029204976vh;
+  height: 16.5581395349vh;
   position: fixed;
   top: 0;
   left: 0;
-  margin-top: 0.9252922157vh;
-  margin-left: 2.4057597609vh;
+  margin-top: 0.6303397783vh;
+  margin-left: 2.2303397783vh;
 }
 * body header nav .tetrahedron {
-  width: 16.6143861547vh;
-  height: 14.3884804782vh;
+  width: 15.4029204976vh;
+  height: 13.3393204434vh;
   transform-style: preserve-3d;
-  /*@keyframes spin{
-      0% {transform: rotateX(0deg) rotatey(180deg) rotateZ(0deg)}
-      100% {transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg)}
-  }*/
 }
 * body header nav .tetrahedron div {
-  width: 16.6143861547vh;
-  height: 14.3884804782vh;
+  width: 15.4029204976vh;
+  height: 13.3393204434vh;
   background-color: salmon;
   -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
           clip-path: polygon(50% 0, 100% 100%, 0 100%);
@@ -78,20 +78,20 @@
 * body header nav .tetrahedron div * {
   background-color: transparent;
 }
-* body header nav .tetrahedron div h2 {
-  margin-top: 2em;
+* body header nav .tetrahedron div a {
+  margin-top: 25%;
 }
 * body header nav .tetrahedron .div1 {
   transform-origin: bottom;
-  transform: translateZ(-4.7961601594vh) rotateX(-19.4712206345deg);
+  transform: translateZ(-4.4464401478vh) rotateX(-19.4712206345deg);
 }
 * body header nav .tetrahedron .div2 {
   transform-origin: bottom;
-  transform: rotateY(-120deg) translateZ(-4.7961601594vh) rotateX(-19.4712206345deg);
+  transform: rotateY(-120deg) translateZ(-4.4464401478vh) rotateX(-19.4712206345deg);
 }
 * body header nav .tetrahedron .div3 {
   transform-origin: bottom;
-  transform: rotateY(120deg) translateZ(-4.7961601594vh) rotateX(-19.4712206345deg);
+  transform: rotateY(120deg) translateZ(-4.4464401478vh) rotateX(-19.4712206345deg);
 }
 @-webkit-keyframes spin1 {
   0% {
@@ -190,61 +190,57 @@
   }
 }
 * body header nav .dotDiv {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  margin-top: 5px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 15.4029204976vh;
+  height: 2.8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 * body header nav .dotDiv .dot {
   cursor: pointer;
-  height: 17px;
-  width: 17px;
-  margin: 0 4px;
+  height: 1.9vh;
+  width: 1.9vh;
   background-color: #ffffff;
-  border-radius: 50%;
-  display: inline-block;
+  margin-right: 8px;
+  margin-left: 8px;
+  border-radius: 100%;
   transition: background-color 0.6s ease;
 }
 * body header nav .dotDiv .active {
   background-color: #616161;
 }
-* body header h1.title {
-  font-size: 3rem;
+* body header .title {
   -webkit-text-decoration: underline 0.3vh;
           text-decoration: underline 0.3vh;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  margin-top: 1.4769230769vh;
-  margin-bottom: 1.4769230769vh;
-  border: 1.3vh solid lime;
-  border-radius: 4.5rem;
+  border: 1.2vh solid lime;
+  border-radius: 11vh;
+  padding-left: 2.4%;
+  padding-right: 2.4%;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 * body main {
   width: 100%;
 }
 * body main .row {
   width: 100%;
-  height: 20.8vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
 }
-* body main .row .mainText {
-  font-size: 3.1rem;
-  line-height: 3.6rem;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+@media screen and (orientation: landscape) {
+  * body main .row {
+    height: 82.2vh;
+  }
+}
+@media screen and (orientation: portrait) {
+  * body main .row {
+    height: 164.4vh;
+  }
+}
+* body main .row .textBox {
   overflow-y: auto;
   box-sizing: border-box;
   background-color: black;
@@ -252,35 +248,32 @@
   box-shadow: rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin;
 }
 @media screen and (orientation: landscape) {
-  * body main .row .mainText {
-    max-width: 45%;
-    max-height: 95%;
-    margin-right: 1.1rem;
+  * body main .row .textBox {
+    width: 45%;
+    height: 95%;
   }
 }
 @media screen and (orientation: portrait) {
-  * body main .row .mainText {
-    max-width: 84%;
+  * body main .row .textBox {
+    width: 84%;
     height: 45%;
   }
 }
-* body main .row .mainText p {
-  margin-right: 0.3rem;
-  margin-left: 0.3rem;
+* body main .row .textBox p {
+  margin-right: 0.5vw;
+  margin-left: 0.5vw;
 }
 * body main .row img {
   box-shadow: rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin;
 }
 @media screen and (orientation: landscape) {
   * body main .row img {
-    height: 45.9rem;
-    margin: auto 1.1rem auto;
+    height: 95%;
   }
 }
 @media screen and (orientation: portrait) {
   * body main .row img {
-    max-height: 45%;
-    margin: auto none auto;
+    height: 45%;
   }
 }
 * body main .row #image1 {
@@ -294,17 +287,14 @@
   border-radius: 16% 16% 12% 12%;
 }
 * body footer {
-  background-color: darkblue;
+  background-color: black;
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  font-size: 2.3rem;
+  height: 11.5vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  border: 1.15vh double lime;
+  border: 1.15vh double gold;
 }
 
 /*
