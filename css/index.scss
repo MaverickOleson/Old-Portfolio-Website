@@ -48,7 +48,7 @@ $panelHeight: $panelWidth * math.sin(60deg);
         header{
             background-color: black;
             width: $fullWidth;
-            height: $headerHeight;
+            min-height: $headerHeight;
             @include flexRow();
             justify-content: center;
             align-items: center;
@@ -104,8 +104,8 @@ $panelHeight: $panelWidth * math.sin(60deg);
                     }
                     $spins: ();
                     @for $i from 0 to 3{
-                        $spins: append($spins, ($i * -120deg, ($i + 1) * -120deg));
-                        $spins: append($spins, ($i * -120deg, ($i - 1) * -120deg));
+                        $spins: append($spins, ($i * 120deg, ($i + 1) * 120deg));
+                        $spins: append($spins, ($i * 120deg, ($i - 1) * 120deg));
                     }
                     @for $i from 1 to 7{
                         @keyframes spin#{$i}{
@@ -139,8 +139,10 @@ $panelHeight: $panelWidth * math.sin(60deg);
                   
             }
             .title{
+                font-size: 4.8vh;
                 text-decoration: underline 0.3vh;
                 border: 1.2vh solid lime;
+                background-color: black;
                 border-radius: 11vh;
                 padding: {
                     left: 2.4%;
@@ -206,11 +208,16 @@ $panelHeight: $panelWidth * math.sin(60deg);
                     border-radius: 16% 16% 12% 12%;
                 }
             }
+            hr{
+                padding-top: 2px;
+                background-color: cyan;
+                border: none;
+            }
         }
         footer{
             background-color: black;
             width: $fullWidth;
-            height: 11.5vh;
+            min-height: 11.5vh;
             display: flex;
             flex-direction: column;
             justify-content: center;

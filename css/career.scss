@@ -1,19 +1,19 @@
 body{
     background: none;
-    background-color: #FF8000;
+    background-color: blue;
     header{
         position: relative;
-        border-color: magenta;
+        border-color: red;
         outline: 0.4vh solid black;
         nav{
             .tetrahedron{
                 div{
-                    background-color: magenta;
+                    background-color: lime;
                 }
             }
         }
         .title{
-            border-color: cyan;
+            border-color: lime;
         }
     }
     main{

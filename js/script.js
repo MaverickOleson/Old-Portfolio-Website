@@ -1,3 +1,17 @@
+function fontSizeLoop(text, textParentSize, cutOff){
+    while(text.outerHeight() < textParentSize - $(window).height() / 100 * cutOff){
+        text.css('font-size', fontSize);
+        fontSize++;
+    }
+    if(text.outerHeight() > textParentSize - $(window).height() / 100 * cutOff){
+        fontSize = parseFloat(text.css('font-size'));
+        while(text.outerHeight() > textParentSize - $(window).height() / 100 * cutOff){
+            text.css('font-size', fontSize);
+            fontSize--;
+        }
+    }
+    fontSize = 0;
+}//
 $(function() {
     var yRotation = 0;
     var dotRotation = 0;
@@ -5,12 +19,12 @@ $(function() {
         $('nav .dotDiv .dot').eq(dotRotation).removeClass('active');
         yRotation++;
         dotRotation++;
-        if(yRotation > 3) yRotation = 1;
         if(dotRotation > 2) dotRotation = 0;
         $('nav .dotDiv .dot').eq(dotRotation).addClass('active');
         if(yRotation == 1) $('nav .tetrahedron').css('animation', 'spin1 1s ease-in-out forwards');
         if(yRotation == 2) $('nav .tetrahedron').css('animation', 'spin3 1s ease-in-out forwards');
         if(yRotation == 3) $('nav .tetrahedron').css('animation', 'spin5 1s ease-in-out forwards');
+        if(yRotation > 2) yRotation = 0;
     }, 5000);
     function yRotateTo(rotateTo){
         if(rotateTo - 1 == yRotation){
@@ -51,67 +65,19 @@ $(function() {
         $(this).addClass('active');
         yRotateTo(2);
     });
-    var fontSize = 0;
-    for(var i = 0; i < $('main .tetrahedron div').length; i++){
-        while($('header .tetrahedron div a h2').eq(i).outerHeight() < $('header .tetrahedron div').eq(i).outerHeight() - $(window).height() / 100 * 5.2){
-            $('header .tetrahedron div a h2').eq(i).css('font-size', fontSize + 'px');
-            fontSize++;
-        }
-        if($('header .title').outerHeight() > $('header').outerHeight() - $(window).height() / 100 * 5.2){
-            fontSize = Number($('header .title').css('font-size').split('px')[0]);
-            while($('header .title').outerHeight() > $('header').outerHeight()  - $(window).height() / 100 * 5.2){
-                $('header .title').css('font-size', fontSize + 'px');
-                fontSize--;
-            }
-        }
-    }
-    while($('header .title').outerHeight() < $('header').outerHeight() - $(window).height() / 100 * 5.2){
-        $('header .title').css('font-size', fontSize + 'px');
-        fontSize++;
-    }
-    if($('header .title').outerHeight() > $('header').outerHeight() - $(window).height() / 100 * 5.2){
-        fontSize = Number($('header .title').css('font-size').split('px')[0]);
-        while($('header .title').outerHeight() > $('header').outerHeight()  - $(window).height() / 100 * 5.2){
-            $('header .title').css('font-size', fontSize + 'px');
-            fontSize--;
-        }
-    }
     fontSize = 0;
+    for(var i = 0; i < $('main .tetrahedron div').length; i++){
+        fontSizeLoop($('header .tetrahedron div a h2').eq(i), $('header .tetrahedron div').eq(i).outerHeight(), 5.2);
+    }
+    fontSizeLoop($('header .title'), $('header').outerHeight(), 4.2);
     //$('header .title').css({'padding-right': $('header .title').outerWidth() / 11, 'padding-left': $('header .title').outerWidth() / 11});
     for(var i = 0; i < $('main .row .textBox').length; i++){
-        while($('main .row .textBox p').eq(i).outerHeight() < $('main .row .textBox').eq(i).height()){
-            $('main .row .textBox p').eq(i).css('font-size', fontSize + 'px');
-            fontSize++;
-        }
-        if($('main .row .textBox p').eq(i).outerHeight() > $('main .row .textBox').eq(i).height()){
-            while($('main .row .textBox p').eq(i).outerHeight() > $('main .row .textBox').eq(i).height()){
-                $('main .row .textBox p').eq(i).css('font-size', fontSize + 'px');
-                fontSize--;
-            }
-        }
-        fontSize = 0;
+        fontSizeLoop($('main .row .textBox p').eq(i), $('main .row .textBox').eq(i).height(), 0);
     }
-    while($('footer p').outerHeight() < $('footer').outerHeight() - $(window).height() / 100 * 1.7){
-        $('footer p').css('font-size', fontSize + 'px');
-        fontSize++;
-    }  
-    if($('footer p').outerHeight() > $('footer').outerHeight() - $(window).height() / 100 * 1.7){
-        fontSize = Number($('footer p').css('font-size').split('px')[0]);
-        while($('footer p').outerHeight() > $('footer').outerHeight()  - $(window).height() / 100 * 1.7){
-            $('footer p').css('font-size', fontSize + 'px');
-            fontSize--;
-        }
-    }
-    if($(window).width() > $(window).height()){
-        $('main .row div h2').css('font-size', $(window).height() / 100 * 4.5);
-        $('main .row h1').css('font-size', $(window).height() / 100 * 7.1);
-        $('main .row .mainText p').css('font-size', $(window).height() / 100 * 4);
-    }
-    else{
-        $('main .row div h2').css('font-size', $(window).width() / 100 * 6.5);
-        $('main .row h1').css('font-size', $(window).width() / 100 * 7.1);
-        $('main .row .mainText p').css('font-size', $(window).width() / 100 * 4);
-    }
+    fontSizeLoop($('footer p'), $('footer').outerHeight(), 1.7);
+    $('main .row div h2').css('font-size',  $('main .row div h2').css('font-size'));
+    $('main .row h1').css('font-size', $('main .row h1').css('font-size'));
+    $('main .row .mainText p').css('font-size', $('main .row .mainText p').css('font-size'));
     //
     //alert(90 - Math.asin(Math.sqrt(Math.pow($('.panel1 .frontPanel').width(), 2) - Math.pow($('.panel1 .frontPanel').width() / 2 / Math.cos(30), 2)) / Math.sqrt(Math.pow($('.panel1 .frontPanel').width(),2) - Math.pow($('.panel1 .frontPanel').width() / 2,2))));
     //$('header nav * div').css({'border-right-width': $('header').height() / 4.5 * 2,'border-left-width': $('header').height() / 4.5 * 2});
@@ -131,8 +97,74 @@ $(function() {
     //$('header nav * .backPanel').css('animation', 'spin2 7.5s infinite ease-in-out');
     //$('header nav * div *').css('transform', 'translateX(' + Number($('header nav * div').css('border-right-width').split('px')[0]) - $('header nav * div *').width() / 2 + ')')
 });
-jQuery(window).on( "orientationchange", function() {
-    location.reload()
+var scale = 1;
+var keyDown = false;
+$(window).keydown(function(key){
+    if(key.keyCode == 17){
+        $(window).keydown(function(key){
+            if(key.keyCode == 187){
+                keyDown = true;
+                if(scale == 1.5) scale = 1.75;
+                if(scale == 1.25) scale = 1.5;
+                if(scale == 1.1) scale = 1.25;
+                if(scale == 1) scale = 1.1;
+                $('img').css('transform', 'scale(' + scale + ')');
+            }
+        });
+    }
+});
+$(window).keyup(function(key){
+    if(key.keyCode == 187){
+        $(window).keyup(function(key){
+            if(key.keyCode == 17){
+                keyDown = false;
+            }
+        });
+    }
+});
+$(window).keydown(function(key){
+    if(key.keyCode == 17){
+        $(window).keydown(function(key){
+            if(key.keyCode == 189){
+                alert("yes")
+                keyDown = true;
+                if(scale == 0.33) scale = 0.25;
+                if(scale == 0.5) scale = 0.33;
+                if(scale == 0.67) scale = 0.5;
+                if(scale == 0.75) scale = 0.67;
+                if(scale == 0.8) scale = 0.75;
+                if(scale == 0.9) scale = 0.8;
+                if(scale == 1) scale = 0.9;
+                $('img').css('transform', 'scale(' + scale + ')');
+            }
+        });
+    }
+});
+$(window).keyup(function(key){
+    if(key.keyCode == 189){
+        $(window).keyup(function(key){
+            if(key.keyCode == 17){
+                keyDown = false;
+            }
+        });
+    }
+});
+$(window).resize(function() {
+    if(!keyDown){
+        fontSize = 0;
+        for(var i = 0; i < $('main .tetrahedron div').length; i++){
+            fontSizeLoop($('header .tetrahedron div a h2').eq(i), $('header .tetrahedron div').eq(i).outerHeight(), 5.2);
+        }
+        fontSizeLoop($('header .title'), $('header').outerHeight(), 5.2);
+        //$('header .title').css({'padding-right': $('header .title').outerWidth() / 11, 'padding-left': $('header .title').outerWidth() / 11});
+        for(var i = 0; i < $('main .row .textBox').length; i++){
+            fontSizeLoop($('main .row .textBox p').eq(i), $('main .row .textBox').eq(i).height(), 0);
+        }
+        fontSizeLoop($('footer p'), $('footer').outerHeight(), 1.7);
+        $('main .row div h2').css('font-size',  $('main .row div h2').css('font-size'));
+        $('main .row h1').css('font-size', $('main .row h1').css('font-size'));
+        $('main .row .mainText p').css('font-size', $('main .row .mainText p').css('font-size'));
+    }
 });
 /*$(window).resize(function() {
     if($(window).width() > $(window).height()) {

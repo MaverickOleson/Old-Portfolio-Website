@@ -1,17 +1,17 @@
 body {
   background: none;
-  background-color: #FF8000;
+  background-color: blue;
 }
 body header {
   position: relative;
-  border-color: magenta;
+  border-color: red;
   outline: 0.4vh solid black;
 }
 body header nav .tetrahedron div {
-  background-color: magenta;
+  background-color: lime;
 }
 body header .title {
-  border-color: cyan;
+  border-color: lime;
 }
 body main .row:nth-of-type(1) {
   height: 82.2vh;
@@ -77,4 +77,4 @@ body main hr {
 }
 body footer {
   border-color: magenta;
-}/*# sourceMappingURL=aboutMe.css.map */
+}/*# sourceMappingURL=career.css.map */
