@@ -1,0 +1,70 @@
+body {
+  background: none;
+  background-color: #B200FF;
+}
+body header {
+  position: relative;
+  border-color: blue;
+  outline: 0.4vh solid black;
+}
+body header nav .tetrahedron div {
+  background-color: magenta;
+}
+body header .title {
+  border-color: #B200FF;
+}
+body main {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+body main h2 {
+  color: black;
+  font-size: 4.5vmin;
+  text-decoration: underline;
+}
+@media screen and (orientation: landscape) {
+  body main div {
+    width: 50%;
+    height: 60vh;
+  }
+}
+@media screen and (orientation: portrait) and (min-width: 1300px) {
+  body main div {
+    width: 1300px;
+    height: 750px;
+  }
+}
+@media screen and (orientation: portrait) and (max-width: 800px) {
+  body main div {
+    width: 800px;
+    height: 461px;
+  }
+}
+body main div img {
+  width: 100%;
+  height: 100%;
+}
+body main div img * {
+  font-size: 0.1vw;
+}
+body main .mainText {
+  width: 85%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-top: 1.4vh;
+  box-sizing: border-box;
+}
+body main .mainText p {
+  text-align: start;
+  color: black;
+  font-size: 4vmin;
+}
+body footer {
+  border-color: magenta;
+}/*# sourceMappingURL=codingGallery.css.map */

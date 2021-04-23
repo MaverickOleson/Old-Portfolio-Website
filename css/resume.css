@@ -8,7 +8,10 @@ body header {
   outline: 0.4vh solid black;
 }
 body header nav .tetrahedron div {
-  background-color: lime;
+  background-color: yellow;
+}
+body header nav .tetrahedron div * {
+  color: black;
 }
 body header .title {
   border-color: lime;
@@ -37,9 +40,7 @@ body main .row .mainText:first-of-type p {
 }
 body main .row .mainText {
   width: 100%;
-  margin-top: 1.4vh;
-  margin-top: 0;
-  margin-bottom: 1vh;
+  margin-top: 1vh;
   box-sizing: border-box;
 }
 body main .row .mainText p {

@@ -1,0 +1,2730 @@
+<!DOCTYPE html>
+<html lang="en" onclick="clickOut()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            overflow: hidden;
+        }
+        body{
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color:rgb(117, 60, 19);
+        }
+        #start{
+            position: absolute;
+            top: auto;
+            right: auto;
+        }
+        #board{
+            background-image: url(images/board.png);
+            background-size: cover;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap-reverse;
+            align-content: space-between;
+        }
+        .whitePieces{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap-reverse;
+        }
+        .blackPieces{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .pieceDIV{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .piece{
+            margin: 0;
+        }
+        .piece:hover{
+            cursor: pointer;
+        }
+        .piece::selection {
+            background-color: transparent;
+        }
+        .moveSpaceDIV:hover{
+            cursor: pointer;
+        }
+        .moveSpaceDIV::selection {
+            background-color: transparent;
+        }
+        .moveSpace{
+            margin: 0;
+            color: black;
+            opacity: 80%;
+        }
+        .moveSpace:hover{
+            cursor: pointer;
+        }
+        .moveSpace::selection {
+            background-color: transparent;
+        }
+        @media (orientation: landscape) {
+            #board{
+                width: 100vh;
+                height: 100vh;
+            }
+            .piece{
+                font-size: 12.5vh;
+            }
+            .pieceDIV{
+                width: 12.5vh;
+                height: 12.5vh;
+            }
+        }
+        @media (orientation: portrait) {
+            #board{
+                width: 100vw;
+                height: 100vw;
+            }
+            .piece{
+                font-size: 12.5vw;
+            }
+            .pieceDIV{
+                width: 12.5vw;
+                height: 12.5vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pieceDIV" onclick="rookMove(0)"></div>
+    <div class="pieceDIV" onclick="knightMove(1)"></div>
+    <div class="pieceDIV" onclick="bishopMove(2)"></div>
+    <div class="pieceDIV" onclick="queenMove(3)"></div>
+    <div class="pieceDIV" onclick="kingMove(4)"></div>
+    <div class="pieceDIV" onclick="bishopMove(5)"></div>
+    <div class="pieceDIV" onclick="knightMove(6)"></div>
+    <div class="pieceDIV" onclick="rookMove(7)"></div>
+    <div class="pieceDIV" onclick="pawnMove(8)"></div>
+    <div class="pieceDIV" onclick="pawnMove(9)"></div>
+    <div class="pieceDIV" onclick="pawnMove(10)"></div>
+    <div class="pieceDIV" onclick="pawnMove(11)"></div>
+    <div class="pieceDIV" onclick="pawnMove(12)"></div>
+    <div class="pieceDIV" onclick="pawnMove(13)"></div>
+    <div class="pieceDIV" onclick="pawnMove(14)"></div>
+    <div class="pieceDIV" onclick="pawnMove(15)"></div>
+    <div class="pieceDIV" onclick="rookMove(16)"></div>
+    <div class="pieceDIV" onclick="knightMove(17)"></div>
+    <div class="pieceDIV" onclick="bishopMove(18)"></div>
+    <div class="pieceDIV" onclick="queenMove(19)"></div>
+    <div class="pieceDIV" onclick="kingMove(20)"></div>
+    <div class="pieceDIV" onclick="bishopMove(21)"></div>
+    <div class="pieceDIV" onclick="knightMove(22)"></div>
+    <div class="pieceDIV" onclick="rookMove(23)"></div>
+    <div class="pieceDIV" onclick="pawnMove(24)"></div>
+    <div class="pieceDIV" onclick="pawnMove(25)"></div>
+    <div class="pieceDIV" onclick="pawnMove(26)"></div>
+    <div class="pieceDIV" onclick="pawnMove(27)"></div>
+    <div class="pieceDIV" onclick="pawnMove(28)"></div>
+    <div class="pieceDIV" onclick="pawnMove(29)"></div>
+    <div class="pieceDIV" onclick="pawnMove(30)"></div>
+    <div class="pieceDIV" onclick="pawnMove(31)"></div>
+    <button onclick="start()" id="start">Start</button>
+    <script>
+//6 rules left
+//need to create board setup
+//prevent unecessary for loops with if statements (maybe)
+//order the beginning
+reload();
+var whitePieceIDs;
+var blackPieceIDs;
+function reload(){//onload
+    pieces = JSON.parse(sessionStorage.getItem('pieces'));
+    moveCount = JSON.parse(sessionStorage.getItem('moveCount'));
+    enPassClear = JSON.parse(sessionStorage.getItem('enPassClear'));
+    if(moveCount >= 1){
+        document.getElementById('start').remove();
+        var board = document.createElement('DIV');
+        board.id = 'board';
+        if(moveCount % 2 == 0){
+            board.style.transform = 'rotateZ(180deg)';
+        }
+        document.body.appendChild(board);
+        var pieceUnicode = ['&#9814', '&#9816', '&#9815', '&#9813', '&#9812', '&#9815', '&#9816', '&#9814', '&#9817', '&#9817', '&#9817', '&#9817', '&#9817', '&#9817', '&#9817', '&#9817', '&#9820', '&#9822', '&#9821', '&#9819', '&#9818', '&#9821', '&#9822', '&#9820', '&#9823', '&#9823', '&#9823', '&#9823', '&#9823', '&#9823', '&#9823', '&#9823'];
+        var whitePieces = document.createElement('DIV');
+        whitePieces.className = 'whitePieces';
+        var blackPieces = document.createElement('DIV');
+        blackPieces.className = 'blackPieces';
+        for(var i = 0; i < 32; i++){
+            var pieceDIV = document.getElementsByTagName('DIV')[0];
+            if((i / 2) < 8) whitePieces.appendChild(pieceDIV);
+            else{
+                blackPieces.appendChild(pieceDIV);
+            }
+            var piece = document.createElement('P');
+            piece.innerHTML = pieceUnicode[i];
+            piece.id = pieces[i][0];
+            piece.className = 'piece';
+            pieceDIV.appendChild(piece);
+            piece.parentElement.style.transform = 'translateY(' + pieces[i][4] + 'vh) translateX(' + pieces[i][5] + 'vh)';
+            if(moveCount % 2 == 0) piece.style.transform = 'rotateX(180deg)';
+            if(pieces[i][1] == null){
+                piece.parentElement.style.zIndex = '-1';
+                piece.innerHTML = '';
+            }
+        }
+        whitePieceIDs = whitePieces;
+        blackPieceIDs = blackPieces;
+        board.appendChild(whitePieces);
+        board.appendChild(blackPieces);
+    }
+}
+var pieces;
+var moveCount;
+var enPassClear;
+function start(){
+    pieces = [['WRook1',1,1,'W',0,0],['WKnight1',1,2,'W',0,0],['WBishop1',1,3,'W',0,0],['WQueen',1,4,'W',0,0],['WKing',1,5,'W',0,0,true,false,false],['WBishop2',1,6,'W',0,0],['WKnight2',1,7,'W',0,0],['WRook2',1,8,'W',0,0],['WPawn1',2,1,'W',0,0,false],['WPawn2',2,2,'W',0,0,false],['WPawn3',2,3,'W',0,0,false],['WPawn4',2,4,'W',0,0,false],['WPawn5',2,5,'W',0,0,false],['WPawn6',2,6,'W',0,0,false],['WPawn7',2,7,'W',0,0,false],['WPawn8',2,8,'W',0,0,false],['BRook1',8,1,'B',0,0],['BKnight1',8,2,'B',0,0],['BBishop1',8,3,'B',0,0],['BQueen',8,4,'B',0,0],['BKing',8,5,'B',0,0,true,false,false],['BBishop2',8,6,'B',0,0],['BKnight2',8,7,'B',0,0],['BRook2',8,8,'B',0,0],['BPawn1',7,1,'B',0,0,false],['BPawn2',7,2,'B',0,0,false],['BPawn3',7,3,'B',0,0,false],['BPawn4',7,4,'B',0,0,false],['BPawn5',7,5,'B',0,0,false],['BPawn6',7,6,'B',0,0,false],['BPawn7',7,7,'B',0,0,false],['BPawn8',7,8,'B',0,0,false]];
+    sessionStorage.setItem('pieces', JSON.stringify(pieces));
+    if(document.getElementById('start')) document.getElementById('start').remove();//rotation fix for new game
+    moveCount = 1;
+    sessionStorage.setItem('moveCount', 1);
+    enPassClear = [null, null];
+    sessionStorage.setItem('enPassClear', JSON.stringify(enPassClear));
+    location.reload()
+}
+var clickConfirm;
+var oneClick;
+function clickOut(){
+    if(clickConfirm){
+        for(var i = 0; i < pieces.length; i++){
+            if(document.getElementById(pieces[i][0]).parentElement.childElementCount > 1){
+                for(var l = 1; l < document.getElementById(pieces[i][0]).parentElement.childElementCount; l++){
+                    document.getElementById(pieces[i][0]).parentElement.childNodes[1].remove();
+                    l--;
+                }
+                break;
+            }
+        }
+        oneClick = false;
+        clickConfirm = false;
+    }
+    if(oneClick) clickConfirm = true;
+}
+function moveSpace(piece, yLength, xLength, i){
+    var moveSpaceDIV = document.createElement('DIV');
+    moveSpaceDIV.style.width = '12.5vh';
+    moveSpaceDIV.style.height = '12.5vh';
+    moveSpaceDIV.style.display = 'flex';
+    moveSpaceDIV.style.justifyContent = 'center';
+    moveSpaceDIV.style.alignItems = 'center';
+    moveSpaceDIV.style.zIndex = '1';
+    moveSpaceDIV.setAttribute('onclick', 'move(' + piece + ', ' + yLength + ', ' + xLength + ', ' + i + ')');
+    var moveSpace = document.createElement('P');
+    if(i || i == 0){
+        moveSpace.innerHTML = '&#9899';
+        moveSpace.style.fontSize = '11.1vh';
+    }
+    else{
+        moveSpace.innerHTML = '&#8226';
+        moveSpace.style.fontSize = '12.5vh';
+    }
+    moveSpace.className = 'moveSpace';
+    moveSpaceDIV.appendChild(moveSpace);
+    document.getElementById(pieces[piece][0]).parentElement.appendChild(moveSpaceDIV);
+    moveSpaceDIV.parentElement.style.zIndex = '1';
+    moveSpaceDIV.style.position = 'absolute';
+    moveSpaceDIV.style.top = 'auto';
+    moveSpaceDIV.style.right = 'auto';
+    moveSpaceDIV.style.left = 'auto';
+    moveSpaceDIV.style.bottom = 'auto';
+    if(pieces[piece][3] == 'W'){
+        moveSpaceDIV.style.transform = 'translateY(calc(-12.5vh * ' + yLength + ')) translateX(calc(12.5vh * ' + xLength + '))';
+    }
+    else{
+        moveSpaceDIV.style.transform = 'translateY(calc(12.5vh * ' + yLength + ')) translateX(calc(-12.5vh * ' + xLength + '))';
+    }
+    oneClick = true;
+}
+function remove(piece){
+    delete pieces[piece][1];
+    delete pieces[piece][2];
+    document.getElementById(pieces[piece][0]).parentElement.style.zIndex = '-1';
+    document.getElementById(pieces[piece][0]).innerHTML = '';
+}
+function pawnMove(piece){
+    for(var i = 0; i < pieces.length; i++){
+        console.log(document.getElementById(pieces[11][0]))
+        if(document.getElementById(pieces[i][0]).parentElement.childElementCount > 1 && i != piece){
+            for(var l = 1; l < document.getElementById(pieces[i][0]).parentElement.childElementCount; l++){//why 1 not 0?
+                document.getElementById(pieces[i][0]).parentElement.childNodes[1].remove();
+                l--;
+            }
+            clickConfirm = false;
+            break;
+        }
+    }
+    var clear1 = false;
+    var clear2 = false;
+    var willTakeR = false;
+    var willTakeL = false;
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W' && pieces[i][3] == 'B'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                moveSpace(piece, 1, 1, i);
+            }
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                moveSpace(piece, 1, -1, i);
+            }
+            if(pieces[piece][1] == pieces[i][1] && piece != i){
+                if(pieces[i][6] && pieces[piece][2] + 1 == pieces[i][2]){
+                    moveSpace(piece, 1, 1, i);
+                }
+                if(pieces[i][6] && pieces[piece][2] - 1 == pieces[i][2]){
+                    moveSpace(piece, 1, -1, i);
+                }
+            }
+        }
+        if(pieces[piece][3] == 'B' && pieces[i][3] == 'W'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                moveSpace(piece, 1, 1, i);
+            }
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                moveSpace(piece, 1, -1, i);
+            }
+            if(pieces[piece][1] == pieces[i][1] && piece != i){
+                if(pieces[i][6] && pieces[piece][2] - 1 == pieces[i][2]/* && document.getElementById(pieces[piece][0]).parentElement.childElementCount == 1*/){
+                    moveSpace(piece, 1, 1, i);
+                }
+                if(pieces[i][6] && pieces[piece][2] + 1 == pieces[i][2]){
+                    moveSpace(piece, 1, -1, i);
+                }
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][2] == pieces[i][2]){
+            if(pieces[piece][3] == 'W' && pieces[piece][1] == 2){
+                if(pieces[piece][1] + 2 == pieces[i][1]){
+                    clear2 = false;
+                    break;
+                }
+                else{
+                    clear2 = true;
+                }
+            }
+            if(pieces[piece][3] == 'B' && pieces[piece][1] == 7){
+                if(pieces[piece][1] - 2 == pieces[i][1]){//rewrite for numbers may not be perfect (fixed! check old file to see if the first (outer) if statement had pieces 1 or 2 (correct one) in it and if the second (inner) had the alternative (1 or 2) number)
+                    clear2 = false;
+                    break;
+                }
+                else{
+                    clear2 = true;
+                }
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][2] == pieces[i][2]){//1 or 2
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] + 1 == pieces[i][1]){
+                    clear1 = false;
+                    break;
+                }
+                else{
+                    clear1 = true;
+                }
+            }
+            if(pieces[piece][3] == 'B'){
+                if(pieces[piece][1] - 1 == pieces[i][1]){
+                    clear1 = false;
+                    break;
+                }
+                else{
+                    clear1 = true;
+                }
+            }
+        }
+    }
+    if(clear1 == true) moveSpace(piece, 1, 0, null);
+    if(clear1 == true && clear2 == true) moveSpace(piece, 2, 0, null);
+    /*
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W' && pieces[i][3] == 'B'){
+            if(willTake != 'y' && pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                willTake = prompt("Will you take R?");
+                if(willTake == 'y'){
+                    pieces[piece][1]++;
+                    pieces[piece][2]++;
+                    pieces[piece][4] = -12.5 + pieces[piece][4];
+                    pieces[piece][5] = 12.5 + pieces[piece][5];
+                    document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                    remove(i);
+                }
+            }
+            if(willTake != 'y' && pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                willTake = prompt("Will you take L?");
+                if(willTake == 'y'){
+                    pieces[piece][1]++;
+                    pieces[piece][2]--;
+                    pieces[piece][4] = -12.5 + pieces[piece][4];
+                    pieces[piece][5] = -12.5 + pieces[piece][5];
+                    document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                    remove(i);
+                }
+            }
+            if(pieces[piece][1] == pieces[i][1]){
+                if(pieces[i][6] && pieces[piece][2] + 1 == pieces[i][2]){
+                    willTake = prompt("Will you take R?");
+                    if(willTake == 'y'){
+                        pieces[piece][1]++;
+                        pieces[piece][2]++;
+                        pieces[piece][4] = -12.5 + pieces[piece][4];
+                        pieces[piece][5] = 12.5 + pieces[piece][5];
+                        document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                        remove(i);
+                    }
+                }
+                if(pieces[i][6] && pieces[piece][2] - 1 == pieces[i][2]){
+                    willTake = prompt("Will you take L?");
+                    if(willTake == 'y'){
+                        pieces[piece][1]++;
+                        pieces[piece][2]--;
+                        pieces[piece][4] = -12.5 + pieces[piece][4];
+                        pieces[piece][5] = -12.5 + pieces[piece][5];
+                        document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                        remove(i);
+                    }
+                }
+            }
+        }
+        if(pieces[piece][3] == 'B' && pieces[i][3] == 'W'){
+            if(willTake != 'y' && pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                willTake = prompt("Will you take R?");
+                if(willTake == 'y'){
+                    pieces[piece][1]--;
+                    pieces[piece][2]--;
+                    pieces[piece][4] = 12.5 + pieces[piece][4];
+                    pieces[piece][5] = -12.5 + pieces[piece][5];
+                    document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                    remove(i);
+                }
+            }
+            if(willTake != 'y' && pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                willTake = prompt("Will you take L?");
+                if(willTake == 'y'){
+                    pieces[piece][1]--;
+                    pieces[piece][2]++;
+                    pieces[piece][4] = 12.5 + pieces[piece][4];
+                    pieces[piece][5] = 12.5 + pieces[piece][5];
+                    document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                    remove(i);
+                }
+            }
+            if(pieces[piece][1] == pieces[i][1]){
+                if(pieces[i][6] && pieces[piece][2] - 1 == pieces[i][2]){
+                    willTake = prompt("Will you take R?");
+                    if(willTake == 'y'){
+                        pieces[piece][1]--;
+                        pieces[piece][2]--;
+                        pieces[piece][4] = 12.5 + pieces[piece][4];
+                        pieces[piece][5] = -12.5 + pieces[piece][5];
+                        document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                        remove(i);
+                    }
+                }
+                if(pieces[i][6] && pieces[piece][2] + 1 == pieces[i][2]){
+                    willTake = prompt("Will you take L?");
+                    if(willTake == 'y'){
+                        pieces[piece][1]--;
+                        pieces[piece][2]++;
+                        pieces[piece][4] = 12.5 + pieces[piece][4];
+                        pieces[piece][5] = 12.5 + pieces[piece][5];
+                        document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                        remove(i);
+                    }
+                }
+            }
+        }
+    }*/
+    /*unnecessary
+    if(willTake != 'y' && clear1){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] == 2){
+                if(pawnMove == 2){
+                    pieces[piece][6] = true;
+                    enPassClear[0] = true;
+                    enPassClear[1] = piece;
+                    pieces[piece][1] += 2;
+                    pieces[piece][4] = -25 + pieces[piece][4];
+                    document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                }
+                else{
+                    pieces[piece][1]++;
+                    pieces[piece][4] = -12.5 + pieces[piece][4];
+                    document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                }
+            }
+            else{
+                pieces[piece][1]++;
+                pieces[piece][4] = -12.5 + pieces[piece][4];
+                document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                if(pieces[piece][1] == 8){
+                    
+                }
+            }
+        }
+        else if(pieces[piece][1] == 7){
+            if(pawnMove == 2){
+                pieces[piece][6] = true;
+                enPassClear[0] = true;
+                enPassClear[1] = piece;
+                pieces[piece][1] -= 2;
+                pieces[piece][4] = 25 + pieces[piece][4];
+                document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+            }
+            else{
+                pieces[piece][1]--;
+                pieces[piece][4] = 12.5 + pieces[piece][4];
+                document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+                if(pieces[piece][1] == 1){
+                    
+                }
+            }
+        }
+        else{
+            pieces[piece][1]--;
+            pieces[piece][4] = 12.5 + pieces[piece][4];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+    }
+    sessionStorage.setItem('pieces', JSON.stringify(pieces));
+    if(document.getElementById('board').style.transform != 'rotateZ(180deg)'){
+        document.getElementById('board').style.transform = 'rotateZ(180deg)';
+        for(var i = 0; i < 32; i++){
+            document.getElementById(pieces[i][0]).style.transform = 'rotateX(180deg)';
+        }
+    }
+    else{
+        document.getElementById('board').style.transform = '';
+        for(var i = 0; i < 32; i++){
+            document.getElementById(pieces[i][0]).style.transform = '';
+        }
+    }
+    moveCount++;
+    sessionStorage.setItem('moveCount', JSON.stringify(moveCount));*/
+}
+function move(piece, yLength, xLength, i){
+    /*for(var i = 0; i < document.getElementById(pieces[piece][0]).parentElement.childElementCount; i++){
+        document.getElementById(pieces[piece][0]).parentElement.childNodes[1].remove();
+    }*/
+    if(pieces[piece][3] == 'W'){
+        pieces[piece][1] += yLength;
+        pieces[piece][2] += xLength;
+        pieces[piece][4] = -12.5 * yLength + pieces[piece][4];
+        pieces[piece][5] = 12.5 * xLength + pieces[piece][5];
+    }
+    else{
+        pieces[piece][1] -= yLength;
+        pieces[piece][2] -= xLength;
+        pieces[piece][4] = 12.5 * yLength + pieces[piece][4];
+        pieces[piece][5] = -12.5 * xLength + pieces[piece][5];
+    }
+    document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+    document.getElementById(pieces[piece][0]).parentElement.style.zIndex = '0';
+    if(i != null) remove(i);
+    sessionStorage.setItem('pieces', JSON.stringify(pieces));
+    if(document.getElementById(pieces[piece][0]).parentElement.getAttribute('onclick').split('')[0] == 'p' && yLength == 2){
+        pieces[piece][6] = true;
+        enPassClear[1] = piece;
+        enPassClear[0] = true;
+    }
+    if(enPassClear[0] && piece != enPassClear[1]){
+        pieces[enPassClear[1]][6] = false;
+        enPassClear[0] = false;;
+    }
+    sessionStorage.setItem('enPassClear', JSON.stringify(enPassClear));
+    if(document.getElementById('board').style.transform != 'rotateZ(180deg)'){
+        document.getElementById('board').style.transform = 'rotateZ(180deg)';
+        for(var l = 0; l < 32; l++){
+            document.getElementById(pieces[l][0]).style.transform = 'rotateX(180deg)';
+        }
+    }
+    else{
+        document.getElementById('board').style.transform = '';
+        for(var l = 0; l < 32; l++){
+            document.getElementById(pieces[l][0]).style.transform = '';
+        }
+    }
+    moveCount++;
+    sessionStorage.setItem('moveCount', JSON.stringify(moveCount));
+}
+function knightMove(piece){
+    for(var i = 0; i < pieces.length; i++){
+        if(document.getElementById(pieces[i][0]).parentElement.childElementCount > 1 && i != piece){
+            for(var l = 1; l < document.getElementById(pieces[i][0]).parentElement.childElementCount; l++){
+                document.getElementById(pieces[i][0]).parentElement.childNodes[1].remove();
+                l--;
+            }
+            clickConfirm = false;
+            break;
+        }
+    }
+    var clearNNE = false;
+    var clearNNW = false;
+    var clearNEE = false;
+    var clearNWW = false;
+    var clearSSE = false;//MARKETING
+    var clearSSW = false;
+    var clearSEE = false;
+    var clearSWW = false;
+    var takeNNE = true;
+    var takeNNW = true;
+    var takeNEE = true;
+    var takeNWW = true;
+    var takeSSE = true;
+    var takeSSW = true;
+    var takeSEE = true;
+    var takeSWW = true;
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] + 2 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearNNE = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, 2, 1, i)
+                    clearNNE = true;
+                    takeNNE = true;
+                    break;
+                }
+            }
+            else{
+                clearNNE = true;
+                takeNNE = false;
+            }
+        }
+        else{
+            if(pieces[piece][1] - 2 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearNNE = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, 2, 1, i)
+                    clearNNE = true;
+                    takeNNE = true;
+                    break;
+                }
+            }
+            else{
+                clearNNE = true;
+                takeNNE = false;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] + 2 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearNNW = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, 2, -1, i)
+                    clearNNW = true;
+                    takeNNW = true;
+                    break;
+                }
+            }
+            else{
+                clearNNW = true;
+                takeNNW = false;
+            }
+        }
+        else{
+            if(pieces[piece][1] - 2 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearNNW = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, 2, -1, i)
+                    clearNNW = true;
+                    takeNNW = true;
+                    break;
+                }
+            }
+            else{
+                clearNNW = true;
+                takeNNW = false;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] + 2 == pieces[i][2]){
+                if(pieces[i][3] == 'w'){
+                    clearNEE = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, 1, 2, i)
+                    clearNEE = true;
+                    takeNEE = true;
+                    break;
+                }
+            }
+            else{
+                clearNEE = true;
+                takeNEE = false;
+            }
+        }
+        else{
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] - 2 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearNEE = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, 1, 2, i)
+                    clearNEE = true;
+                    takeNEE = true;
+                    break;
+                }
+            }
+            else{
+                clearNEE = true;
+                takeNEE = false;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] - 2 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearNWW = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, 1, -2, i)
+                    clearNWW = true;
+                    takeNWW = true;
+                    break;
+                }
+            }
+            else{
+                clearNWW = true;
+                takeNWW = false;
+            }
+        }
+        else{
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] + 2 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearNWW = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, 1, -2, i)
+                    clearNWW = true;
+                    takeNWW = true;
+                    break;
+                }
+            }
+            else{
+                clearNWW = true;
+                takeNWW = false;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] - 2 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearSSE = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, -2, 1, i)
+                    clearSSE = true;
+                    takeSSE = true;
+                    break;
+                }
+            }
+            else{
+                clearSSE = true;
+                takeSSE = false;
+            }
+        }
+        else{
+            if(pieces[piece][1] + 2 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearSSE = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, -2, 1, i)
+                    clearSSE = true;
+                    takeSSE = true;
+                    break;
+                }
+            }
+            else{
+                clearSSE = true;
+                takeSSE = false;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] - 2 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearSSW = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, -2, -1, i)
+                    clearSSW = true;
+                    takeSSW = true;
+                    break;
+                }
+            }
+            else{
+                clearSSW = true;
+                takeSSW = false;
+            }
+        }
+        else{
+            if(pieces[piece][1] + 2 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearSSW = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, -2, -1, i)
+                    clearSSW = true;
+                    takeSSW = true;
+                    break;
+                }
+            }
+            else{
+                clearSSW = true;
+                takeSSW = false;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] + 2 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearSEE = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, -1, 2, i)
+                    clearSEE = true;
+                    takeSEE = true;
+                    break;
+                }
+            }
+            else{
+                clearSEE = true;
+                takeSEE = false;
+            }
+        }
+        else{
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] - 2 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearSEE = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, -1, 2, i)
+                    clearSEE = true;
+                    takeSEE = true;
+                    break;
+                }
+            }
+            else{
+                clearSEE = true;
+                takeSEE = false;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] - 2 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearSWW = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, -1, -2, i)
+                    clearSWW = true;
+                    takeSWW = true;
+                    break;
+                }
+            }
+            else{
+                clearSWW = true;
+                takeSWW = false;
+            }
+        }
+        else{
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] + 2 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearSWW = false;
+                    break;
+                }
+                else{
+                    moveSpace(piece, -1, -2, i)
+                    clearSWW = true;
+                    takeSWW = true;
+                    break;
+                }
+            }
+            else{
+                clearSWW = true;
+                takeSWW = false;
+            }
+        }
+    }
+    if(clearNNE && !takeNNE) moveSpace(piece, 2, 1, null);
+    if(clearNNW && !takeNNW) moveSpace(piece, 2, -1, null);
+    if(clearNEE && !takeNEE) moveSpace(piece, 1, 2, null);
+    if(clearNWW && !takeNWW) moveSpace(piece, 1, -2, null);
+    if(clearSSE && !takeSSE) moveSpace(piece, -2, 1, null);
+    if(clearSSW && !takeSSW) moveSpace(piece, -2, -1, null);
+    if(clearSEE && !takeSEE) moveSpace(piece, -1, 2, null);
+    if(clearSWW && !takeSWW) moveSpace(piece, -1, -2, null);
+    sessionStorage.setItem('pieces', JSON.stringify(pieces));
+}
+function bishopMove(piece){
+    for(var i = 0; i < pieces.length; i++){
+        if(document.getElementById(pieces[i][0]).parentElement.childElementCount > 1 && i != piece){
+            for(var l = 1; l < document.getElementById(pieces[i][0]).parentElement.childElementCount; l++){
+                document.getElementById(pieces[i][0]).parentElement.childNodes[1].remove();
+                l--;
+            }
+            clickConfirm = false;
+            break;
+        }
+    }
+    var clearNE;
+    var clearNW;
+    var clearSE;
+    var clearSW;
+    for(var l = 1; l < 8; l++){
+        clearNE = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearNE = false;
+                        break;
+                    }
+                    else{
+                        clearNE = false;
+                        moveSpace(piece, l, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearNE = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearNE = false;
+                        break;
+                    }
+                    else{
+                        clearNE = false;
+                        moveSpace(piece, l, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearNE = true;
+                }
+            }
+            if(i == 31 && clearNE) moveSpace(piece, l, l, null);
+        }
+        if(!clearNE) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearNW = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearNW = false;
+                        break;
+                    }
+                    else{
+                        clearNW = false;
+                        moveSpace(piece, l, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearNW = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearNW = false;
+                        break;
+                    }
+                    else{
+                        clearNW = false;
+                        moveSpace(piece, l, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearNW = true;
+                }
+            }
+            if(i == 31 && clearNW) moveSpace(piece, l, -l, null);
+        }
+        if(!clearNW) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearSE = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearSE = false;
+                        break;
+                    }
+                    else{
+                        clearSE = false;
+                        moveSpace(piece, -l, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearSE = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearSE = false;
+                        break;
+                    }
+                    else{
+                        clearSE = false;
+                        moveSpace(piece, -l, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearSE = true;
+                }
+            }
+            if(i == 31 && clearSE) moveSpace(piece, -l, l, null);
+        }
+        if(!clearSE) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearSW = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearSW = false;
+                        break;
+                    }
+                    else{
+                        clearSW = false;
+                        moveSpace(piece, -l, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearSW = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearSW = false;
+                        break;
+                    }
+                    else{
+                        clearSW = false;
+                        moveSpace(piece, -l, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearSW = true;
+                }
+            }
+            if(i == 31 && clearSW) moveSpace(piece, -l, -l, null);
+        }
+        if(!clearSW) break;
+    }
+    /*for(var i = 0; i < pieces.length; i++){
+        if(dir == 'se'){
+            if(pieces[piece][1] - Number(dist) == pieces[i][1] && pieces[piece][2] + Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(dir == 'sw'){
+            if(pieces[piece][1] - Number(dist) == pieces[i][1] && pieces[piece][2] - Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(dir == 'nw'){
+            if(pieces[piece][1] + Number(dist) == pieces[i][1] && pieces[piece][2] - Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+    }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        for(var l = 1; l < Number(dist); l++){
+            if(dir == 'ne'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'se'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'sw'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'nw'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+        }
+        if(clear == false) break;
+    }
+    if(clear){
+        if(dir == 'ne'){
+            pieces[piece][1] += Number(dist);
+            pieces[piece][2] += Number(dist);
+            pieces[piece][4] = -12.5 * Number(dist) + pieces[piece][4];
+            pieces[piece][5] = 12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'se'){
+            pieces[piece][1] -= Number(dist);
+            pieces[piece][2] += Number(dist);
+            pieces[piece][4] = 12.5 * Number(dist) + pieces[piece][4];
+            pieces[piece][5] = 12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'sw'){
+            pieces[piece][1] -= Number(dist);
+            pieces[piece][2] -= Number(dist);
+            pieces[piece][4] = 12.5 * Number(dist) + pieces[piece][4];
+            pieces[piece][5] = -12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'nw'){
+            pieces[piece][1] += Number(dist);
+            pieces[piece][2] -= Number(dist);
+            pieces[piece][4] = -12.5 * Number(dist) + pieces[piece][4];
+            pieces[piece][5] = -12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+    }*/
+}
+function rookMove(piece){
+    for(var i = 0; i < pieces.length; i++){
+        if(document.getElementById(pieces[i][0]).parentElement.childElementCount > 1 && i != piece){
+            for(var l = 1; l < document.getElementById(pieces[i][0]).parentElement.childElementCount; l++){
+                document.getElementById(pieces[i][0]).parentElement.childNodes[1].remove();
+                l--;
+            }
+            clickConfirm = false;
+            break;
+        }
+    }
+    var clearN;
+    var clearE;
+    var clearS;
+    var clearW;
+    for(var l = 1; l < 8; l++){
+        clearN = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearN = false;
+                        break;
+                    }
+                    else{
+                        clearN = false;
+                        moveSpace(piece, l, 0, i);
+                        break;
+                    }
+                }
+                else{
+                    clearN = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearN = false;
+                        break;
+                    }
+                    else{
+                        clearN = false;
+                        moveSpace(piece, l, 0, i);
+                        break;
+                    }
+                }
+                else{
+                    clearN = true;
+                }
+            }
+            if(i == 31 && clearN) moveSpace(piece, l, 0, null);
+        }
+        if(!clearN) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearE = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearE = false;
+                        break;
+                    }
+                    else{
+                        clearE = false;
+                        moveSpace(piece, 0, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearE = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearE = false;
+                        break;
+                    }
+                    else{
+                        clearE = false;
+                        moveSpace(piece, 0, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearE = true;
+                }
+            }
+            if(i == 31 && clearE) moveSpace(piece, 0, l, null);
+        }
+        if(!clearE) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearS = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearS = false;
+                        break;
+                    }
+                    else{
+                        clearS = false;
+                        moveSpace(piece, -l, 0, i);
+                        break;
+                    }
+                }
+                else{
+                    clearS = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearS = false;
+                        break;
+                    }
+                    else{
+                        clearS = false;
+                        moveSpace(piece, -l, 0, i);
+                        break;
+                    }
+                }
+                else{
+                    clearS = true;
+                }
+            }
+            if(i == 31 && clearS) moveSpace(piece, -l, 0, null);
+        }
+        if(!clearS) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearW = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearW = false;
+                        break;
+                    }
+                    else{
+                        clearW = false;
+                        moveSpace(piece, 0, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearW = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearW = false;
+                        break;
+                    }
+                    else{
+                        clearW = false;
+                        moveSpace(piece, 0, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearW = true;
+                }
+            }
+            if(i == 31 && clearW) moveSpace(piece, 0, -l, null);
+        }
+        if(!clearW) break;
+    }
+    /*var clear = false;
+    var piece = prompt("Which piece?");
+    var dist = prompt('What distance?');
+    for(var i = 0; i < pieces.length; i++){
+        if(dir == 'n'){
+            if(pieces[piece][1] + Number(dist) == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'e'){
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] + Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 's'){
+            if(pieces[piece][1] - Number(dist) == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'w'){
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        for(var l = 1; l < Number(dist); l++){
+            if(dir == 'n'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'e'){
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 's'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'w'){
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+        }
+        if(clear == false) break;
+    }
+    if(clear){
+        if(dir == 'n'){
+            pieces[piece][1] += Number(dist);
+            pieces[piece][4] = -12.5 * Number(dist) + pieces[piece][4];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'e'){
+            pieces[piece][2] += Number(dist);
+            pieces[piece][5] = 12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 's'){
+            pieces[piece][1] -= Number(dist);
+            pieces[piece][4] = 12.5 * Number(dist) + pieces[piece][4];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'w'){
+            pieces[piece][2] -= Number(dist);
+            pieces[piece][5] = -12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+    }
+    sessionStorage.setItem('pieces', JSON.stringify(pieces));
+    if(document.getElementById('board').style.transform != 'rotateZ(180deg)'){
+        document.getElementById('board').style.transform = 'rotateZ(180deg)';
+        for(var i = 0; i < 32; i++){
+            document.getElementById(pieces[i][0]).style.transform = 'rotateX(180deg)';
+        }
+    }
+    else{
+        document.getElementById('board').style.transform = '';
+        for(var i = 0; i < 32; i++){
+            document.getElementById(pieces[i][0]).style.transform = '';
+        }
+    }
+    moveCount++;
+    sessionStorage.setItem('moveCount', JSON.stringify(moveCount));*/
+}
+function queenMove(piece){
+    for(var i = 0; i < pieces.length; i++){
+        if(document.getElementById(pieces[i][0]).parentElement.childElementCount > 1 && i != piece){
+            for(var l = 1; l < document.getElementById(pieces[i][0]).parentElement.childElementCount; l++){
+                document.getElementById(pieces[i][0]).parentElement.childNodes[1].remove();
+                l--;
+            }
+            clickConfirm = false;
+            break;
+        }
+    }
+    var clearN;
+    var clearE;
+    var clearS;
+    var clearW;
+    var clearNE;
+    var clearNW;
+    var clearSE;
+    var clearSW;
+    for(var l = 1; l < 8; l++){
+        clearN = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearN = false;
+                        break;
+                    }
+                    else{
+                        clearN = false;
+                        moveSpace(piece, l, 0, i);
+                        break;
+                    }
+                }
+                else{
+                    clearN = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearN = false;
+                        break;
+                    }
+                    else{
+                        clearN = false;
+                        moveSpace(piece, l, 0, i);
+                        break;
+                    }
+                }
+                else{
+                    clearN = true;
+                }
+            }
+            if(i == 31 && clearN) moveSpace(piece, l, 0, null);
+        }
+        if(!clearN) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearE = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearE = false;
+                        break;
+                    }
+                    else{
+                        clearE = false;
+                        moveSpace(piece, 0, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearE = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearE = false;
+                        break;
+                    }
+                    else{
+                        clearE = false;
+                        moveSpace(piece, 0, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearE = true;
+                }
+            }
+            if(i == 31 && clearE) moveSpace(piece, 0, l, null);
+        }
+        if(!clearE) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearS = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearS = false;
+                        break;
+                    }
+                    else{
+                        clearS = false;
+                        moveSpace(piece, -l, 0, i);
+                        break;
+                    }
+                }
+                else{
+                    clearS = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearS = false;
+                        break;
+                    }
+                    else{
+                        clearS = false;
+                        moveSpace(piece, -l, 0, i);
+                        break;
+                    }
+                }
+                else{
+                    clearS = true;
+                }
+            }
+            if(i == 31 && clearS) moveSpace(piece, -l, 0, null);
+        }
+        if(!clearS) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearW = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearW = false;
+                        break;
+                    }
+                    else{
+                        clearW = false;
+                        moveSpace(piece, 0, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearW = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearW = false;
+                        break;
+                    }
+                    else{
+                        clearW = false;
+                        moveSpace(piece, 0, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearW = true;
+                }
+            }
+            if(i == 31 && clearW) moveSpace(piece, 0, -l, null);
+        }
+        if(!clearW) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearNE = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearNE = false;
+                        break;
+                    }
+                    else{
+                        clearNE = false;
+                        moveSpace(piece, l, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearNE = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearNE = false;
+                        break;
+                    }
+                    else{
+                        clearNE = false;
+                        moveSpace(piece, l, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearNE = true;
+                }
+            }
+            if(i == 31 && clearNE) moveSpace(piece, l, l, null);
+        }
+        if(!clearNE) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearNW = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearNW = false;
+                        break;
+                    }
+                    else{
+                        clearNW = false;
+                        moveSpace(piece, l, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearNW = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearNW = false;
+                        break;
+                    }
+                    else{
+                        clearNW = false;
+                        moveSpace(piece, l, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearNW = true;
+                }
+            }
+            if(i == 31 && clearNW) moveSpace(piece, l, -l, null);
+        }
+        if(!clearNW) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearSE = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearSE = false;
+                        break;
+                    }
+                    else{
+                        clearSE = false;
+                        moveSpace(piece, -l, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearSE = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearSE = false;
+                        break;
+                    }
+                    else{
+                        clearSE = false;
+                        moveSpace(piece, -l, l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearSE = true;
+                }
+            }
+            if(i == 31 && clearSE) moveSpace(piece, -l, l, null);
+        }
+        if(!clearSE) break;
+    }
+    for(var l = 1; l < 8; l++){
+        clearSW = false;
+        for(var i = 0; i < pieces.length; i++){
+            if(pieces[piece][3] == 'W'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    if(pieces[i][3] == 'W'){
+                        clearSW = false;
+                        break;
+                    }
+                    else{
+                        clearSW = false;
+                        moveSpace(piece, -l, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearSW = true;
+                }
+            }
+            else{
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    if(pieces[i][3] == 'B'){
+                        clearSW = false;
+                        break;
+                    }
+                    else{
+                        clearSW = false;
+                        moveSpace(piece, -l, -l, i);
+                        break;
+                    }
+                }
+                else{
+                    clearSW = true;
+                }
+            }
+            if(i == 31 && clearSW) moveSpace(piece, -l, -l, null);
+        }
+        if(!clearSW) break;
+    }
+    /*var clear = false;
+    var dir = prompt('Which direction?');
+    var dist = prompt('What distance?');
+    for(var i = 0; i < pieces.length; i++){
+        if(dir == 'n'){
+            if(pieces[piece][1] + Number(dist) == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'e'){
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] + Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 's'){
+            if(pieces[piece][1] - Number(dist) == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'w'){
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'ne'){
+            if(pieces[piece][1] + Number(dist) == pieces[i][1] && pieces[piece][2] + Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'se'){
+            if(pieces[piece][1] - Number(dist) == pieces[i][1] && pieces[piece][2] + Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'sw'){
+            if(pieces[piece][1] - Number(dist) == pieces[i][1] && pieces[piece][2] - Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'nw'){
+            if(pieces[piece][1] + Number(dist) == pieces[i][1] && pieces[piece][2] - Number(dist) == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        for(var l = 1; l <= dist; l++){
+            if(dir == 'n'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'e'){
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 's'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'w'){
+                if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'ne'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'se'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] + l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'sw'){
+                if(pieces[piece][1] - l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+            if(dir == 'nw'){
+                if(pieces[piece][1] + l == pieces[i][1] && pieces[piece][2] - l == pieces[i][2]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    clear = true;
+                }
+            }
+        }
+        if(clear == false) break;
+    }
+    if(clear){
+        if(dir == 'n'){
+            pieces[piece][1] += Number(dist);
+            pieces[piece][4] = -12.5 * Number(dist) + pieces[piece][4];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'e'){
+            pieces[piece][2] += Number(dist);
+            pieces[piece][5] = 12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 's'){
+            pieces[piece][1] -= Number(dist);
+            pieces[piece][4] = 12.5 * Number(dist) + pieces[piece][4];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'w'){
+            pieces[piece][2] -= Number(dist);
+            pieces[piece][5] = -12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'ne'){
+            pieces[piece][1] += Number(dist);
+            pieces[piece][2] += Number(dist);
+            pieces[piece][4] = -12.5 * Number(dist) + pieces[piece][4];
+            pieces[piece][5] = 12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'se'){
+            pieces[piece][1] -= Number(dist);
+            pieces[piece][2] += Number(dist);
+            pieces[piece][4] = 12.5 * Number(dist) + pieces[piece][4];
+            pieces[piece][5] = 12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'sw'){
+            pieces[piece][1] -= Number(dist);
+            pieces[piece][2] -= Number(dist);
+            pieces[piece][4] = 12.5 * Number(dist) + pieces[piece][4];
+            pieces[piece][5] = -12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'nw'){
+            pieces[piece][1] += Number(dist);
+            pieces[piece][2] -= Number(dist);
+            pieces[piece][4] = -12.5 * Number(dist) + pieces[piece][4];
+            pieces[piece][5] = -12.5 * Number(dist) + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+    }
+    sessionStorage.setItem('pieces', JSON.stringify(pieces));
+    if(document.getElementById('board').style.transform != 'rotateZ(180deg)'){
+        document.getElementById('board').style.transform = 'rotateZ(180deg)';
+        for(var i = 0; i < 32; i++){
+            document.getElementById(pieces[i][0]).style.transform = 'rotateX(180deg)';
+        }
+    }
+    else{
+        document.getElementById('board').style.transform = '';
+        for(var i = 0; i < 32; i++){
+            document.getElementById(pieces[i][0]).style.transform = '';
+        }
+    }
+    moveCount++;
+    sessionStorage.setItem('moveCount', JSON.stringify(moveCount));*/
+}
+//rooks needs vars to show movement (remove castle ability)
+//potential (unlikely) enPassant glitch (enPassant pieces other than pawns?)
+function kingMove(piece){
+    for(var i = 0; i < pieces.length; i++){
+        if(document.getElementById(pieces[i][0]).parentElement.childElementCount > 1 && i != piece){
+            for(var l = 0; l < document.getElementById(pieces[i][0]).parentElement.childElementCount; l++){
+                document.getElementById(pieces[i][0]).parentElement.childNodes[1].remove();
+            }
+            clickConfirm = false;
+            break;
+        }
+    }
+    var castleLeft;
+    var castleRight;
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][6] && pieces[piece][3] == 'W' && pieces[piece][1] == 1 && pieces[piece][2] == 5 && pieces[0][1] == 1 && pieces[0][2] == 1){
+            if(pieces[i][1] == 1 && pieces[i][2] == 4 || pieces[i][1] == 1 && pieces[i][2] == 3 || pieces[i][1] == 1 && pieces[i][2] == 2){
+                castleLeft = false;
+                break;
+            }
+            else{
+                castleLeft = true;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][6] && pieces[piece][3] == 'W' && pieces[piece][1] == 1 && pieces[piece][2] == 5 && pieces[7][1] == 1 && pieces[7][2] == 8){
+            if(pieces[i][1] == 1 && pieces[i][2] == 6 || pieces[i][1] == 1 && pieces[i][2] == 7){
+                castleRight = false;
+                break;
+            }
+            else{
+                castleRight = true;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][6] && pieces[piece][3] == 'B' && pieces[piece][1] == 8 && pieces[piece][2] == 5 && pieces[16][1] == 8 && pieces[16][2] == 1){
+            if(pieces[i][1] == 8 && pieces[i][2] == 4 || pieces[i][1] == 8 && pieces[i][2] == 3 || pieces[i][1] == 8 && pieces[i][2] == 2){
+                castleRight = false;
+                break;
+            }
+            else{
+                castleRight = true;
+            }
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        if(pieces[piece][6] && pieces[piece][3] == 'B' && pieces[piece][1] == 8 && pieces[piece][2] == 5 && pieces[23][1] == 8 && pieces[23][2] == 8){
+            if(pieces[i][1] == 8 && pieces[i][2] == 6 || pieces[i][1] == 8 && pieces[i][2] == 7){
+                castleLeft = false;
+                break;
+            }
+            else{
+                castleLeft = true;
+            }
+        }
+    }
+    //change right vs. left castle names
+    /*temporary*/if(pieces[piece][6] && castleLeft && pieces[piece][3] == 'W'){
+        castleLeft = prompt('Will you castle Left?');
+        if(castleLeft == 'y'){
+            pieces[piece][2] = 3;
+            pieces[0][2] = 4;
+            pieces[piece][6] = false;
+            pieces[piece][5] = -25 + pieces[piece][5];
+            pieces[0][5] = 37.5;
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+            document.getElementById(pieces[0][0]).parentElement.style.transform = 'translateY(' + pieces[0][4] + 'vh) translateX(' + pieces[0][5] + 'vh)';
+        }
+    }
+    /*temporary*/if(pieces[piece][6] && castleRight && pieces[piece][3] == 'W'){
+        castleRight = prompt('Will you castle right?');
+        if(castleRight == 'y'){
+            pieces[piece][2] = 7;
+            pieces[7][2] = 6;
+            pieces[piece][6] = false;
+            pieces[piece][5] = 25 + pieces[piece][5];
+            pieces[7][5] = -25;
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+            document.getElementById(pieces[7][0]).parentElement.style.transform = 'translateY(' + pieces[7][4] + 'vh) translateX(' + pieces[7][5] + 'vh)';
+        }
+    }
+    /*temporary*/if(pieces[piece][6] && castleRight && pieces[piece][3] == 'B'){
+        castleRight = prompt('Will you castle right?');
+        if(castleRight == 'y'){
+            pieces[piece][2] = 3;
+            pieces[16][2] = 4;
+            pieces[piece][6] = false;
+            pieces[piece][5] = -25 + pieces[piece][5];
+            pieces[16][5] = 37.5;
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+            document.getElementById(pieces[16][0]).parentElement.style.transform = 'translateY(' + pieces[16][4] + 'vh) translateX(' + pieces[16][5] + 'vh)';
+        }
+    }
+    /*temporary*/if(pieces[piece][6] && castleLeft && pieces[piece][3] == 'B'){
+        castleLeft = prompt('Will you castle Left?');
+        if(castleLeft == 'y'){
+            pieces[piece][2] = 7;
+            pieces[23][2] = 6;
+            pieces[piece][6] = false;
+            pieces[piece][5] = 25 + pieces[piece][5];
+            pieces[23][5] = -25;
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+            document.getElementById(pieces[23][0]).parentElement.style.transform = 'translateY(' + pieces[23][4] + 'vh) translateX(' + pieces[23][5] + 'vh)';
+        }
+    }
+    for(var i = 0; i < pieces.length; i++){
+        clearN = false;
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearN = false;
+                    break;
+                }
+                else{
+                    clearN = false;
+                    moveSpace(piece, 1, 0, i);
+                    break;
+                }
+            }
+            else{
+                clearN = true;
+            }
+        }
+        else{
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearN = false;
+                    break;
+                }
+                else{
+                    clearN = false;
+                    moveSpace(piece, 1, 0, i);
+                    break;
+                }
+            }
+            else{
+                clearN = true;
+            }
+        }
+        if(i == 31 && clearN) moveSpace(piece, 1, 0, null);
+        if(!clearN) break;
+    }
+    for(var i = 0; i < pieces.length; i++){
+        clearE = false;
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearE = false;
+                    break;
+                }
+                else{
+                    clearE = false;
+                    moveSpace(piece, 0, 1, i);
+                    break;
+                }
+            }
+            else{
+                clearE = true;
+            }
+        }
+        else{
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearE = false;
+                    break;
+                }
+                else{
+                    clearE = false;
+                    moveSpace(piece, 0, 1, i);
+                    break;
+                }
+            }
+            else{
+                clearE = true;
+            }
+        }
+        if(i == 31 && clearE) moveSpace(piece, 0, 1, null);
+        if(!clearE) break;
+    }
+    for(var i = 0; i < pieces.length; i++){
+        clearS = false;
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearS = false;
+                    break;
+                }
+                else{
+                    clearS = false;
+                    moveSpace(piece, -1, 0, i);
+                    break;
+                }
+            }
+            else{
+                clearS = true;
+            }
+        }
+        else{
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearS = false;
+                    break;
+                }
+                else{
+                    clearS = false;
+                    moveSpace(piece, -1, 0, i);
+                    break;
+                }
+            }
+            else{
+                clearS = true;
+            }
+        }
+        if(i == 31 && clearS) moveSpace(piece, -1, 0, null);
+        if(!clearS) break;
+    }
+    for(var i = 0; i < pieces.length; i++){
+        clearW = false;
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearW = false;
+                    break;
+                }
+                else{
+                    clearW = false;
+                    moveSpace(piece, 0, -1, i);
+                    break;
+                }
+            }
+            else{
+                clearW = true;
+            }
+        }
+        else{
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearW = false;
+                    break;
+                }
+                else{
+                    clearW = false;
+                    moveSpace(piece, 0, -1, i);
+                    break;
+                }
+            }
+            else{
+                clearW = true;
+            }
+        }
+        if(i == 31 && clearW) moveSpace(piece, 0, -1, null);
+        if(!clearW) break;
+    }
+    for(var i = 0; i < pieces.length; i++){
+        clearNE = false;
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearNE = false;
+                    break;
+                }
+                else{
+                    clearNE = false;
+                    moveSpace(piece, 1, 1, i);
+                    break;
+                }
+            }
+            else{
+                clearNE = true;
+            }
+        }
+        else{
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearNE = false;
+                    break;
+                }
+                else{
+                    clearNE = false;
+                    moveSpace(piece, 1, 1, i);
+                    break;
+                }
+            }
+            else{
+                clearNE = true;
+            }
+        }
+        if(i == 31 && clearNE) moveSpace(piece, 1, 1, null);
+        if(!clearNE) break;
+    }
+    for(var i = 0; i < pieces.length; i++){
+        clearNW = false;
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearNW = false;
+                    break;
+                }
+                else{
+                    clearNW = false;
+                    moveSpace(piece, 1, -1, i);
+                    break;
+                }
+            }
+            else{
+                clearNW = true;
+            }
+        }
+        else{
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearNW = false;
+                    break;
+                }
+                else{
+                    clearNW = false;
+                    moveSpace(piece, 1, -1, i);
+                    break;
+                }
+            }
+            else{
+                clearNW = true;
+            }
+        }
+        if(i == 31 && clearNW) moveSpace(piece, 1, -1, null);
+        if(!clearNW) break;
+    }
+    for(var i = 0; i < pieces.length; i++){
+        clearSE = false;
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearSE = false;
+                    break;
+                }
+                else{
+                    clearSE = false;
+                    moveSpace(piece, -1, 1, i);
+                    break;
+                }
+            }
+            else{
+                clearSE = true;
+            }
+        }
+        else{
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearSE = false;
+                    break;
+                }
+                else{
+                    clearSE = false;
+                    moveSpace(piece, -1, 1, i);
+                    break;
+                }
+            }
+            else{
+                clearSE = true;
+            }
+        }
+        if(i == 31 && clearSE) moveSpace(piece, -1, 1, null);
+        if(!clearSE) break;
+    }
+    for(var i = 0; i < pieces.length; i++){
+        clearSW = false;
+        if(pieces[piece][3] == 'W'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[i][3] == 'W'){
+                    clearSW = false;
+                    break;
+                }
+                else{
+                    clearSW = false;
+                    moveSpace(piece, -1, -1, i);
+                    break;
+                }
+            }
+            else{
+                clearSW = true;
+            }
+        }
+        else{
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[i][3] == 'B'){
+                    clearSW = false;
+                    break;
+                }
+                else{
+                    clearSW = false;
+                    moveSpace(piece, -1, -1, i);
+                    break;
+                }
+            }
+            else{
+                clearSW = true;
+            }
+        }
+        if(i == 31 && clearSW) moveSpace(piece, -1, -1, null);
+        if(!clearSW) break;
+    }
+    /*for(var i = 0; i < pieces.length; i++){
+        if(dir == 'n'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'e'){
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 's'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'w'){
+            if(pieces[piece][1] == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'ne'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'se'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] + 1 == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'sw'){
+            if(pieces[piece][1] - 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+        if(dir == 'nw'){
+            if(pieces[piece][1] + 1 == pieces[i][1] && pieces[piece][2] - 1 == pieces[i][2]){
+                if(pieces[piece][3] == pieces[i][3]){
+                    clear = false;
+                    break;
+                }
+                else{
+                    remove(i);
+                    clear = true;
+                    break;
+                }
+            }
+            else{
+                clear = true;
+            }
+        }
+    }
+    if(clear){
+        if(dir == 'n'){
+            pieces[piece][1]++;
+            pieces[piece][4] = -12.5 + pieces[piece][4];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'e'){
+            pieces[piece][2]++;
+            pieces[piece][5] = 12.5 + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 's'){
+            pieces[piece][1]--;
+            pieces[piece][4] = 12.5 + pieces[piece][4];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'w'){
+            pieces[piece][2]--;
+            pieces[piece][5] = -12.5 + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'ne'){
+            pieces[piece][1]++;
+            pieces[piece][2]++;
+            pieces[piece][4] = -12.5 + pieces[piece][4];
+            pieces[piece][5] = 12.5 + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'se'){
+            pieces[piece][1]--;
+            pieces[piece][2]++;
+            pieces[piece][4] = 12.5 + pieces[piece][4];
+            pieces[piece][5] = 12.5 + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'sw'){
+            pieces[piece][1]--;
+            pieces[piece][2]--;
+            pieces[piece][4] = 12.5 + pieces[piece][4];
+            pieces[piece][5] = -12.5 + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+        if(dir == 'nw'){
+            pieces[piece][1]++;
+            pieces[piece][2]--;
+            pieces[piece][4] = -12.5 + pieces[piece][4];
+            pieces[piece][5] = -12.5 + pieces[piece][5];
+            document.getElementById(pieces[piece][0]).parentElement.style.transform = 'translateY(' + pieces[piece][4] + 'vh) translateX(' + pieces[piece][5] + 'vh)';
+        }
+    }
+    sessionStorage.setItem('pieces', JSON.stringify(pieces));
+    if(document.getElementById('board').style.transform != 'rotateZ(180deg)'){
+        document.getElementById('board').style.transform = 'rotateZ(180deg)';
+        for(var i = 0; i < 32; i++){
+            document.getElementById(pieces[i][0]).style.transform = 'rotateX(180deg)';
+        }
+    }
+    else{
+        document.getElementById('board').style.transform = '';
+        for(var i = 0; i < 32; i++){
+            document.getElementById(pieces[i][0]).style.transform = '';
+        }
+    }
+    moveCount++;
+    sessionStorage.setItem('moveCount', JSON.stringify(moveCount));*/
+}
+    </script>
+</body>
+</html>

@@ -8,7 +8,10 @@ body{
         nav{
             .tetrahedron{
                 div{
-                    background-color: lime;
+                    background-color: yellow;
+                    *{
+                        color: black;
+                    }
                 }
             }
         }
@@ -44,11 +47,7 @@ body{
             }
             .mainText{
                 width: 100%;
-                margin-top: 1.4vh;    
-                margin: {
-                    top: 0;
-                    bottom: 1vh;
-                }
+                margin-top: 1vh;
                 box-sizing: border-box;
                 p{
                     text-align: start;
