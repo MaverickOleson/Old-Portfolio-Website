@@ -84,6 +84,7 @@ $panelHeight: $panelWidth * math.sin(60deg);
                         align-items: center;
                         backface-visibility: hidden;
                         *{
+                            font-size: 2.4vh;
                             background-color: transparent;
                         }
                         a{
