@@ -1,0 +1,52 @@
+body {
+  background: none;
+  background-color: blue;
+}
+body header {
+  position: relative;
+  border-color: red;
+  outline: 0.4vh solid black;
+}
+body header nav .tetrahedron div {
+  background-color: lime;
+}
+body header .title {
+  border-color: lime;
+}
+body main .row {
+  width: 85%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-right: 7.5%;
+  margin-left: 7.5%;
+  flex-direction: column;
+  justify-content: unset;
+  box-sizing: border-box;
+  background-color: lime;
+  border-right: 1vw double black;
+  border-left: 1vw double black;
+}
+body main .row h2 {
+  color: black;
+  font-size: 4.5vmin;
+  text-decoration: underline;
+}
+body main .row .mainText:first-of-type p {
+  text-align: center;
+}
+body main .row .mainText {
+  width: 100%;
+  margin-top: 1.4vh;
+  margin-top: 0;
+  margin-bottom: 1vh;
+  box-sizing: border-box;
+}
+body main .row .mainText p {
+  text-align: start;
+  color: black;
+  font-size: 4vmin;
+}
+body footer {
+  border-color: magenta;
+}/*# sourceMappingURL=resume.css.map */

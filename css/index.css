@@ -210,7 +210,6 @@
   background-color: #616161;
 }
 * body header .title {
-  font-size: 4.8vh;
   -webkit-text-decoration: underline 0.3vh;
           text-decoration: underline 0.3vh;
   border: 1.2vh solid lime;
