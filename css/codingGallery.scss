@@ -1,6 +1,6 @@
 body{
     background: none;
-    background-color: #B200FF;
+    background-color: cyan;
     header{
         position: relative;
         border-color: blue;
@@ -17,30 +17,44 @@ body{
         }
     }
     main{
+        width: 85%;
         height: fit-content;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
+        background-color: #B200FF;
+        margin: {
+            right: 7.5%;
+            left: 7.5%;
+        }
         h2{
-            color: black;
             font-size: 4.5vmin;
             text-decoration: underline;
+            margin-top: 1vh;
+            color: black
         }
-        div{
+        #galleryView{
             @media screen and (orientation:landscape) {
-                width: 50%;
-                height: 60vh;
+                width: 60vw;
+                #next{
+                    right: 20vw;
+                }
             }
             @media screen and (orientation:portrait) {
-                @media screen and (min-width: 1300px){
-                    width: 1300px;
-                    height: 750px;
+                width: 100vw;
+                #next{
+                    right: 1vh;
                 }
-                @media screen and (max-width: 800px){
-                    width: 800px;
-                    height: 461px;
-                }
+            }
+            box-sizing: border-box;
+            border: 1vh double magenta;
+            button{
+                width: 13%;
+                background-color: black;
+                opacity: 0.5;
+                color: white;
+                position: absolute;
+                font-size: 3vw;
             }
             img{
                 width: 100%;
@@ -53,16 +67,20 @@ body{
         .mainText{
             width: 85%;
             height: fit-content;
-            margin-top: 1.4vh;
+            margin: {
+                top: 1.4vh;
+                right: auto; 
+                left: auto;
+            }
             box-sizing: border-box;
             p{
-                text-align: start;
+                text-align: center;
                 color: black;
                 font-size: 4vmin;
             }
         }
     }
     footer{
-        border-color: magenta;
+        border-color: lime;
     }
 }

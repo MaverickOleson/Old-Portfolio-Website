@@ -85,10 +85,13 @@ $(function() {
     for(var i = 0; i < $('main .row .textBox').length; i++){
         fontSizeLoop($('main .row .textBox p').eq(i), $('main .row .textBox').eq(i).height(), 0);
     }
-    fontSizeLoop($('footer p'), $('footer').outerHeight(), 1.7);
+    for(var i = 0; i < $('footer a').length; i++){
+        fontSizeLoop($('footer a').eq(i), $('footer').height() / 3, 0);
+    }
     $('main .row div h2').css('font-size',  $('main .row div h2').css('font-size'));
     $('main .row h1').css('font-size', $('main .row h1').css('font-size'));
-    $('main .row .mainText p').css('font-size', $('main .row .mainText p').css('font-size'));
+    $('main .mainText p').css('font-size', $('main .mainText p').css('font-size'));
+    $('button').css('height', $('#galleryImg').height());
     var keyDown = false;
     $(window).keydown(function(key){
         if(key.keyCode == 17){
@@ -156,10 +159,13 @@ $(function() {
             for(var i = 0; i < $('main .row .textBox').length; i++){
                 fontSizeLoop($('main .row .textBox p').eq(i), $('main .row .textBox').eq(i).height(), 0);
             }
-            fontSizeLoop($('footer p'), $('footer').outerHeight(), 1.7);
+            for(var i = 0; i < $('footer a').length; i++){
+                fontSizeLoop($('footer a').eq(i), $('footer').height() / 3, 0);
+            }
             $('main .row div h2').css('font-size',  $('main .row div h2').css('font-size'));
             $('main .row h1').css('font-size', $('main .row h1').css('font-size'));
-            $('main .row .mainText p').css('font-size', $('main .row .mainText p').css('font-size'));
+            $('main .mainText p').css('font-size', $('main .mainText p').css('font-size'));
+            $('button').css('height', $('#galleryImg').height());
         }
     });
 });

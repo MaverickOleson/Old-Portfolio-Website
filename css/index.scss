@@ -1,5 +1,9 @@
 @use 'sass:math';
 @use 'sass:list';
+@font-face {
+    font-family: Retro;
+    src: url(../fonts/SFAlienEncounters.ttf);
+}
 $fullWidth: 100%;
 /*@media screen and (orientation:landscape) {
     @media screen and (min-width: 1920px) {
@@ -43,6 +47,7 @@ $panelHeight: $panelWidth * math.sin(60deg);
     margin: 0;
     color: white;
     text-align: center;
+    font-family: Retro;
     body{
         background: linear-gradient(to right, darkviolet, blue, darkviolet);
         header{
@@ -156,13 +161,18 @@ $panelHeight: $panelWidth * math.sin(60deg);
         }
         main{
             width: $fullWidth;
+            #row1{
+                @media screen and (orientation:portrait) {
+                    height: 164.4vh;
+                }
+            }
             .row{
                 width: $fullWidth;
                 @media screen and (orientation:landscape) {
                     height: 82.2vh;
                 }
                 @media screen and (orientation:portrait) {
-                    height: 164.4vh;
+                    height: 100.4vh;
                 }
                 @include flexRow();
                 align-items: center;
@@ -189,20 +199,26 @@ $panelHeight: $panelWidth * math.sin(60deg);
                     }
                 }
                 img{
+                    box-shadow: rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin;
+                }
+                #image1{
                     @media screen and (orientation:landscape) {
                         height: 95%;
                     }
                     @media screen and (orientation:portrait) {
-                        height: 45%;
+                        width: 95%;
                     }
-                    box-shadow: rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin;
-                }
-                #image1{
                     box-sizing: border-box;
                     border: 1.15vh double lime;
                     border-radius: 16% 16% 12% 12%;
                 }
                 #image2{
+                    @media screen and (orientation:landscape) {
+                        width: 45%;
+                    }
+                    @media screen and (orientation:portrait) {
+                        width: 95%;
+                    }
                     box-sizing: border-box;
                     border: 1.15vh double lime;
                     border-radius: 16% 16% 12% 12%;
@@ -226,41 +242,3 @@ $panelHeight: $panelWidth * math.sin(60deg);
         }
     }
 }
-/*
-@import 'partials/nav1';
-@media (orientation: landscape) {
-    @import 'partials/nav2';
-}
-nav{
-    img{
-        height: auto;
-    }
-}
-footer{
-    background-color: blue;
-    color: white;
-}*/
-/*
-Resources for animation test:
-
-#div1{
-    background-color: red;
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    top: 0;
-}
-#div2{
-    background-color: blue;
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    bottom: 0;
-}
-#p1{
-    z-index: 1;
-}
-#p-place{
-    margin: 0;
-    visibility: hidden;
-}*/

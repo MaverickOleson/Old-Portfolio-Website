@@ -16,8 +16,8 @@
         <nav>
             <div class="tetrahedron">
                 <div class="div1"><a href="index.html"><h2>Home<br>Page</h2></a></div>
-                <div class="div2"><a href="resume.html"><h2>Resume</h2></a></div>
-                <div class="div3"><a href="AboutMe.html"><h2>About<br>Me</h2></a></div>
+                <div class="div2"><a href="AboutMe.html"><h2>About<br>Me</h2></a></div>
+                <div class="div3"><a href="resume.html"><h2>Resume</h2></a></div>
             </div>
             <div class="dotDiv">
                 <span class="dot active"></span>
@@ -25,22 +25,109 @@
                 <span class="dot"></span>
             </div>
         </nav>
-        <h1 class="title">Resume</h1>
+        <h1 class="title">Coding Gallery</h1>
     </header>
     <main>
-        <h2 id="galleryH1">Title</h2>
-        <div>
-            <!--button id="Back" onclick="back()"><h2>Back</h2></button-->
-            <img src="images/" href="https://moleso587587.github.io/Regular-Show-Fan-Page/"></iframe>
-            <!--button id="Next" onclick="next()"><h2>Next</h2></button-->
+        <h2 id="galleryH1">My Unit<br>Group Project</h2>
+        <div id="galleryView">
+            <button id="back" onclick="back()">&#706</button>
+            <a href="https://eves259.github.io/Unit-Group-Project/"><img id="galleryImg" src="images/Unit-Group-Project.png"></a>
+            <button id="next" onclick="next()">&#707</button>
         </div>
         <div class="mainText">
-            <p id="galleryP">INSERT</p>
+            <p id="galleryP">This is a project I did in a group of two people. It's a website for a fake construction company, called Constructus. This was my second responsive website, so it functions decent in terms of responsiveness, but it's not as responsive as I'd like it to be, so it's not as pretty on mobile devices.</p>
         </div>
     </main>
     <footer>
-        <p>@Copyright Maverick Oleson 2021<br>This is a non-profit info-site</p>
+        <a>Maverick Oleson 2021</a>
+        <a>Email: MaverickOleson@gmail.com</a>
+        <a>Github: Moleso587587</a>
     </footer>
+    <script>
+        var imgLoop = 1;
+        //loop to be iterated
+        function next(){
+            imgLoop++;
+            if(imgLoop > 6) imgLoop = 1;
+            //loop goes through 6 and 1 and changes images and links with if statements depending on the number
+            if(imgLoop == 1){
+                $('#galleryH1').html('My Unit<br>Group Project');
+                $('#galleryImg').attr('src', 'images/Unit-Group-Project.png');
+                $('#galleryImg').parent().attr('href', 'https://eves259.github.io/Unit-Group-Project/');
+                $('#galleryP').html("This is a project I did in a group of two people. It's a website for a fake construction company, called Constructus. This was my second responsive website, so it functions decent in terms of responsiveness, but it's not as responsive as I'd like it to be, so it's not as pretty on mobile devices.")
+            }
+            if(imgLoop == 2){
+                $('#galleryH1').html('My Regular<br>Show Fan Page');
+                $('#galleryImg').attr('src', 'images/Regular-Show-Fan-Page.png');
+                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Regular-Show-Fan-Page/');
+                $('#galleryP').html("This is the fan page I did for Regular Show. In it, you can find a gallery, much like this one, with moment from Regular Show and a quiz on Regular Show, with a dark and light mode for every page. This website, assigned by my coding teacher, is not meant to be responsive, and is honestly kind of janky on mobile devices. What I was most proud about this website was the functionality of the gallery. It was my most ambitious javascript-based project yet, and, as you'll see, there were more ambitious projects to come.")
+            }
+            if(imgLoop == 3){
+                $('#galleryH1').html('My Group<br>Car Website');
+                $('#galleryImg').attr('src', 'images/Group-Car-Website.png');
+                $('#galleryImg').parent().attr('href', 'https://lzalit238.github.io/Group-Car-Website/');
+                $('#galleryP').html("This is another group project, still of two people, and it was made as a tribute to the Shelby Cobra Series of cars. It's another unresponsive website. This website challenged my ability to represent an already existing brand. My biggest struggle was deciding how to categorize the information on this series of cars and create a worthwhile presentation of each category of information.");
+            }
+            if(imgLoop == 4){
+                $('#galleryH1').html('My Group<br>Bootstrap Website');
+                $('#galleryImg').attr('src', 'images/Group-Bootstrap-Website.png');
+                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Group-Boot-Strap-Website/');
+                $('#galleryP').html("Indeed, another other group project, except, this time, with three people! We were assigned to make a website about a childhood toy of ours. We settled on Marvel action figures. I selected a Venom action figure for my action figure. This website, yet again, is not responsive. As you might've guessed, this website took bootstrap, which is essentially an easier way to style websites. It was kind of a learning curve, one that I probably had a worse time with than I would now. I got to add some javascript to change the coloring and layout of the page, which was interesting.");
+            }
+            if(imgLoop == 5){
+                $('#galleryH1').html('My West-Mec<br>Coding Page');
+                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Jquery-Index-Page-of-West-Mec-Coding/');
+                $('#galleryImg').attr('src', 'images/West-Mec-Coding.png');
+                $('#galleryP').html("This is a webpage for West-Mec Coding, the class I am taking to learn how to make websites like these. This website is pretty responsive. It'd probably work somewhat well on your mobile device. Plus, this website uses jquery instead of regular javascript, which, I soon realized, was going to be permanently chosen over javascript. At the time of making this, I realized I could use jquery to style the website and control the positioning and sizing of elements in the website, which began the start of a styling system I developed for future websites, such as this one. In fact, this website is the best example of my jquery styling system. The funnest thing I got to do for this web page was create an animation for the coding logo in the center.");
+            }
+            if(imgLoop == 6){
+                $('#galleryH1').html('My<br>Chess Game');
+                $('#galleryImg').attr('src', 'images/Regular-Show-Fan-Page.png');
+                $('#galleryP').html("This is my most recent, unfinished, greates, most complicated project to date. It's chess! Not much else to explain, apart from the fact that it was a personal project I did in my spare time. I began it before I learned jquery, and I was so far into it, when I did learn jquery, that I didn't want to redo it.");
+            }
+        }
+        function back(){
+            imgLoop--;
+            if(imgLoop < 1) imgLoop = 6;
+            //loop goes through 1 and 6 and changes images and links with if statements depending on the number
+            if(imgLoop == 1){
+                $('#galleryH1').html('My Unit<br>Group Project');
+                $('#galleryImg').attr('src', 'images/Unit-Group-Project.png');
+                $('#galleryImg').parent().attr('href', 'https://eves259.github.io/Unit-Group-Project/');
+                $('#galleryP').html("This is a project I did in a group of two people. It's a website for a fake construction company, called Constructus. This was my second responsive website, so it functions decent in terms of responsiveness, but it's not as responsive as I'd like it to be, so it's not as pretty on mobile devices.")
+            }
+            if(imgLoop == 2){
+                $('#galleryH1').html('My Regular<br>Show Fan Page');
+                $('#galleryImg').attr('src', 'images/Regular-Show-Fan-Page.png');
+                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Regular-Show-Fan-Page/');
+                $('#galleryP').html("This is the fan page I did for Regular Show. In it, you can find a gallery, much like this one, with moment from Regular Show and a quiz on Regular Show, with a dark and light mode for every page. This website, assigned by my coding teacher, is not meant to be responsive, and is honestly kind of janky on mobile devices. What I was most proud about this website was the functionality of the gallery. It was my most ambitious javascript-based project yet, and, as you'll see, there were more ambitious projects to come.")
+            }
+            if(imgLoop == 3){
+                $('#galleryH1').html('My Group<br>Car Website');
+                $('#galleryImg').attr('src', 'images/Group-Car-Website.png');
+                $('#galleryImg').parent().attr('href', 'https://lzalit238.github.io/Group-Car-Website/');
+                $('#galleryP').html("This is another group project, still of two people, and it was made as a tribute to the Shelby Cobra Series of cars. It's another unresponsive website. This website challenged my ability to represent an already existing brand. My biggest struggle was deciding how to categorize the information on this series of cars and create a worthwhile presentation of each category of information.");
+            }
+            if(imgLoop == 4){
+                $('#galleryH1').html('My Group<br>Bootstrap Website');
+                $('#galleryImg').attr('src', 'images/Group-Bootstrap-Website.png');
+                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Group-Boot-Strap-Website/');
+                $('#galleryP').html("Indeed, another other group project, except, this time, with three people! We were assigned to make a website about a childhood toy of ours. We settled on Marvel action figures. I selected a Venom action figure for my action figure. This website, yet again, is not responsive. As you might've guessed, this website took bootstrap, which is essentially an easier way to style websites. It was kind of a learning curve, one that I probably had a worse time with than I would now. I got to add some javascript to change the coloring and layout of the page, which was interesting.");
+            }
+            if(imgLoop == 5){
+                $('#galleryH1').html('My West-Mec<br>Coding Page');
+                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Jquery-Index-Page-of-West-Mec-Coding/');
+                $('#galleryImg').attr('src', 'images/West-Mec-Coding.png');
+                $('#galleryP').html("This is a webpage for West-Mec Coding, the class I am taking to learn how to make websites like these. This website is pretty responsive. It'd probably work somewhat well on your mobile device. Plus, this website uses jquery instead of regular javascript, which, I soon realized, was going to be permanently chosen over javascript. At the time of making this, I realized I could use jquery to style the website and control the positioning and sizing of elements in the website, which began the start of a styling system I developed for future websites, such as this one. In fact, this website is the best example of my jquery styling system. The funnest thing I got to do for this web page was create an animation for the coding logo in the center.");
+            }
+            if(imgLoop == 6){
+                $('#galleryH1').html('My<br>Chess Game');
+                $('#galleryImg').attr('src', '');
+                $('#galleryImg').parent().attr('href', 'https://moleso587587.github.io/Chess/');
+                $('#galleryP').html("This is my most recent, unfinished, greates, most complicated project to date. It's chess! It doesn't work in any sort of portrait mode yet, but it will soon. All the pieces work, but some rules need to be added. Not much else to explain, apart from the fact that it was a personal project I did in my spare time. I began it before I learned jquery, and I was so far into it, when I did learn jquery, that I didn't want to redo it.");
+            }
+        }
+    </script>
     <link rel="stylesheet" type="text/css" href="css/codingGallery.css">
 </body>
 </html>

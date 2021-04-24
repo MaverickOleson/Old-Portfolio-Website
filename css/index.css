@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Retro;
+  src: url(../fonts/SFAlienEncounters.ttf);
+}
 /*@media screen and (orientation:landscape) {
     @media screen and (min-width: 1920px) {
         html{
@@ -31,6 +35,7 @@
   margin: 0;
   color: white;
   text-align: center;
+  font-family: Retro;
 }
 * body {
   background: linear-gradient(to right, darkviolet, blue, darkviolet);
@@ -224,6 +229,11 @@
 * body main {
   width: 100%;
 }
+@media screen and (orientation: portrait) {
+  * body main #row1 {
+    height: 164.4vh;
+  }
+}
 * body main .row {
   width: 100%;
   display: flex;
@@ -239,7 +249,7 @@
 }
 @media screen and (orientation: portrait) {
   * body main .row {
-    height: 164.4vh;
+    height: 100.4vh;
   }
 }
 * body main .row .textBox {
@@ -268,25 +278,35 @@
 * body main .row img {
   box-shadow: rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin;
 }
-@media screen and (orientation: landscape) {
-  * body main .row img {
-    height: 95%;
-  }
-}
-@media screen and (orientation: portrait) {
-  * body main .row img {
-    height: 45%;
-  }
-}
 * body main .row #image1 {
   box-sizing: border-box;
   border: 1.15vh double lime;
   border-radius: 16% 16% 12% 12%;
 }
+@media screen and (orientation: landscape) {
+  * body main .row #image1 {
+    height: 95%;
+  }
+}
+@media screen and (orientation: portrait) {
+  * body main .row #image1 {
+    width: 95%;
+  }
+}
 * body main .row #image2 {
   box-sizing: border-box;
   border: 1.15vh double lime;
   border-radius: 16% 16% 12% 12%;
+}
+@media screen and (orientation: landscape) {
+  * body main .row #image2 {
+    width: 45%;
+  }
+}
+@media screen and (orientation: portrait) {
+  * body main .row #image2 {
+    width: 95%;
+  }
 }
 * body main hr {
   padding-top: 2px;
@@ -302,43 +322,4 @@
   justify-content: center;
   box-sizing: border-box;
   border: 1.15vh double gold;
-}
-
-/*
-@import 'partials/nav1';
-@media (orientation: landscape) {
-    @import 'partials/nav2';
-}
-nav{
-    img{
-        height: auto;
-    }
-}
-footer{
-    background-color: blue;
-    color: white;
-}*/
-/*
-Resources for animation test:
-
-#div1{
-    background-color: red;
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    top: 0;
-}
-#div2{
-    background-color: blue;
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    bottom: 0;
-}
-#p1{
-    z-index: 1;
-}
-#p-place{
-    margin: 0;
-    visibility: hidden;
-}*//*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */
