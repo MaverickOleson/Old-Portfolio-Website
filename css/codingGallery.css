@@ -7,11 +7,18 @@ body header {
   border-color: blue;
   outline: 0.4vh solid black;
 }
+body header nav {
+  background-color: none;
+}
 body header nav .tetrahedron div {
   background-color: magenta;
 }
 body header .title {
   border-color: #B200FF;
+}
+body header #inverter {
+  top: 12.2vh;
+  right: 0;
 }
 body main {
   width: 85%;

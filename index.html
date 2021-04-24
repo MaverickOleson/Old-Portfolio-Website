@@ -25,9 +25,10 @@
             </div>
         </nav>
         <h1 class="title">Maverick Oleson's<br>Portfolio Website</h1>
+        <button id="inverter" onclick="invertC()">Invert Colors</button>
     </header>
     <main>
-        <div class="row" id="row1">
+        <div class="row">
             <div class="textBox">
                 <p>This website is the portfolio website of I, Sir Maverick Oleson. Throughout this website, you'll find information about me. Though, while you're perusing through this information, don't forget to stop and look around every once and a while. This website was made by me, so I'd be very pleased if you were to take the time to try and appreciate what you will, concerning what you learn about me as well as the design and features of the website.</p>
             </div>
@@ -46,5 +47,23 @@
         <a>Email: MaverickOleson@gmail.com</a>
         <a>Github: Moleso587587</a>
     </footer>
+    <script>
+        var cInversion = false;
+        //variable for current color inversion
+        function invertC(){
+            if(cInversion){
+                cInversion = false;
+                $('html').css('filter', '');
+                $('img').css({'filter': '', 'border-color': 'lime', 'box-shadow': 'rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin'});
+                //if the color has been inverted, cInversion will turn false, the invert filter will turn off, and the image borders and box shadows will return to their usual coloring
+            }
+            else{
+                cInversion = true;
+                $('html').css('filter', 'invert(1)');
+                $('img').css({'filter': 'invert(1)', 'border-color': '#ff00ff', 'box-shadow': 'rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin'});
+                //if the color has not been inverted, cInversion will turn true, the invert filter will turn on, and the image borders and box shadows will turn to their inverted coloring
+            }
+        }
+    </script>
 </body>
 </html>

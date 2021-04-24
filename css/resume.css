@@ -16,6 +16,10 @@ body header nav .tetrahedron div * {
 body header .title {
   border-color: lime;
 }
+body header #inverter {
+  top: 12.2vh;
+  right: 0;
+}
 body main .row {
   width: 85%;
   height: -webkit-fit-content;

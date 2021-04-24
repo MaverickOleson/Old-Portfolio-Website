@@ -13,6 +13,10 @@ body header nav .tetrahedron div {
 body header .title {
   border-color: cyan;
 }
+body header #inverter {
+  top: 12.2vh;
+  right: 0;
+}
 body main .row:nth-of-type(1) {
   height: 82.2vh;
 }

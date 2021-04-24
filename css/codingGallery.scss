@@ -6,6 +6,7 @@ body{
         border-color: blue;
         outline: 0.4vh solid black;
         nav{
+            background-color: none;
             .tetrahedron{
                 div{
                     background-color: magenta;
@@ -14,6 +15,10 @@ body{
         }
         .title{
             border-color: #B200FF;
+        }
+        #inverter{
+            top: 12.2vh;
+            right: 0;
         }
     }
     main{

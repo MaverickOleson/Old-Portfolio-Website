@@ -26,6 +26,7 @@
             </div>
         </nav>
         <h1 class="title">Resume</h1>
+        <button id="inverter" onclick="invertC()">Invert Colors</button>
     </header>
     <main>
         <div class="row">
@@ -60,5 +61,20 @@
         <a>Email: MaverickOleson@gmail.com</a>
         <a>Github: Moleso587587</a>
     </footer>
+    <script>
+        var cInversion = false;
+        function invertC(){
+            if(cInversion){
+                cInversion = false;
+                $('html').css('filter', '');
+                //if the color has been inverted, cInversion will turn false and the invert filter will turn off
+            }
+            else{
+                cInversion = true;
+                $('html').css('filter', 'invert(1)');
+                //if the color has not been inverted, cInversion will turn true and the invert filter will turn on
+            }
+        }
+    </script>
 </body>
 </html>

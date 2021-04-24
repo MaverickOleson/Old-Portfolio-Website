@@ -26,6 +26,7 @@
             </div>
         </nav>
         <h1 class="title">Coding Gallery</h1>
+        <button id="inverter" onclick="invertC()">Invert Colors</button>
     </header>
     <main>
         <h2 id="galleryH1">My Unit<br>Group Project</h2>
@@ -49,7 +50,7 @@
         function next(){
             imgLoop++;
             if(imgLoop > 6) imgLoop = 1;
-            //loop goes through 6 and 1 and changes images and links with if statements depending on the number
+            //loop goes through 1 and 6, then back to 1, and changes images, text, and links with the latter if statements depending on the number
             if(imgLoop == 1){
                 $('#galleryH1').html('My Unit<br>Group Project');
                 $('#galleryImg').attr('src', 'images/Unit-Group-Project.png');
@@ -89,7 +90,7 @@
         function back(){
             imgLoop--;
             if(imgLoop < 1) imgLoop = 6;
-            //loop goes through 1 and 6 and changes images and links with if statements depending on the number
+            //loop goes through 6 and 1, then back to 6, and changes images, text, and links with the latter if statements depending on the number
             if(imgLoop == 1){
                 $('#galleryH1').html('My Unit<br>Group Project');
                 $('#galleryImg').attr('src', 'images/Unit-Group-Project.png');
@@ -125,6 +126,24 @@
                 $('#galleryImg').attr('src', '');
                 $('#galleryImg').parent().attr('href', 'https://moleso587587.github.io/Chess/');
                 $('#galleryP').html("This is my most recent, unfinished, greates, most complicated project to date. It's chess! It doesn't work in any sort of portrait mode yet, but it will soon. All the pieces work, but some rules need to be added. Not much else to explain, apart from the fact that it was a personal project I did in my spare time. I began it before I learned jquery, and I was so far into it, when I did learn jquery, that I didn't want to redo it.");
+            }
+        }
+    </script>
+    <script>
+        var cInversion = false;
+        //variable for current color inversion
+        function invertC(){
+            if(cInversion){
+                cInversion = false;
+                $('html').css('filter', '');
+                $('img').css({'filter': '', 'border-color': 'lime', 'box-shadow': 'rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin'});
+                //if the color has been inverted, cInversion will turn false, the invert filter will turn off, and the image borders and box shadows will return to their usual coloring
+            }
+            else{
+                cInversion = true;
+                $('html').css('filter', 'invert(1)');
+                $('img').css({'filter': 'invert(1)', 'border-color': '#ff00ff', 'box-shadow': 'rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin'});
+                //if the color has not been inverted, cInversion will turn true, the invert filter will turn on, and the image borders and box shadows will turn to their inverted coloring
             }
         }
     </script>
