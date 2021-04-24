@@ -45,6 +45,7 @@ body main #galleryView {
 @media screen and (orientation: landscape) {
   body main #galleryView {
     width: 60vw;
+    height: 31vw;
   }
   body main #galleryView #next {
     right: 20vw;
@@ -53,10 +54,14 @@ body main #galleryView {
 @media screen and (orientation: portrait) {
   body main #galleryView {
     width: 100vw;
+    height: 51vw;
   }
   body main #galleryView #next {
     right: 1vh;
   }
+}
+body main #galleryView #back {
+  z-index: 1;
 }
 body main #galleryView button {
   width: 13%;

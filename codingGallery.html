@@ -77,13 +77,13 @@
             }
             if(imgLoop == 5){
                 $('#galleryH1').html('My West-Mec<br>Coding Page');
-                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Jquery-Index-Page-of-West-Mec-Coding/');
                 $('#galleryImg').attr('src', 'images/West-Mec-Coding.png');
+                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Jquery-Index-Page-of-West-Mec-Coding/');
                 $('#galleryP').html("This is a webpage for West-Mec Coding, the class I am taking to learn how to make websites like these. This website is pretty responsive. It'd probably work somewhat well on your mobile device. Plus, this website uses jquery instead of regular javascript, which, I soon realized, was going to be permanently chosen over javascript. At the time of making this, I realized I could use jquery to style the website and control the positioning and sizing of elements in the website, which began the start of a styling system I developed for future websites, such as this one. In fact, this website is the best example of my jquery styling system. The funnest thing I got to do for this web page was create an animation for the coding logo in the center.");
             }
             if(imgLoop == 6){
                 $('#galleryH1').html('My<br>Chess Game');
-                $('#galleryImg').attr('src', 'images/Regular-Show-Fan-Page.png');
+                $('#galleryImg').attr('src', 'images/Chess.png');
                 $('#galleryP').html("This is my most recent, unfinished, greates, most complicated project to date. It's chess! Not much else to explain, apart from the fact that it was a personal project I did in my spare time. I began it before I learned jquery, and I was so far into it, when I did learn jquery, that I didn't want to redo it.");
             }
         }
@@ -117,13 +117,13 @@
             }
             if(imgLoop == 5){
                 $('#galleryH1').html('My West-Mec<br>Coding Page');
-                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Jquery-Index-Page-of-West-Mec-Coding/');
                 $('#galleryImg').attr('src', 'images/West-Mec-Coding.png');
+                $('#galleryImg').parent().attr('href', 'https://Moleso587587.github.io/Jquery-Index-Page-of-West-Mec-Coding/');
                 $('#galleryP').html("This is a webpage for West-Mec Coding, the class I am taking to learn how to make websites like these. This website is pretty responsive. It'd probably work somewhat well on your mobile device. Plus, this website uses jquery instead of regular javascript, which, I soon realized, was going to be permanently chosen over javascript. At the time of making this, I realized I could use jquery to style the website and control the positioning and sizing of elements in the website, which began the start of a styling system I developed for future websites, such as this one. In fact, this website is the best example of my jquery styling system. The funnest thing I got to do for this web page was create an animation for the coding logo in the center.");
             }
             if(imgLoop == 6){
                 $('#galleryH1').html('My<br>Chess Game');
-                $('#galleryImg').attr('src', '');
+                $('#galleryImg').attr('src', 'images/Chess.png');
                 $('#galleryImg').parent().attr('href', 'https://moleso587587.github.io/Chess/');
                 $('#galleryP').html("This is my most recent, unfinished, greates, most complicated project to date. It's chess! It doesn't work in any sort of portrait mode yet, but it will soon. All the pieces work, but some rules need to be added. Not much else to explain, apart from the fact that it was a personal project I did in my spare time. I began it before I learned jquery, and I was so far into it, when I did learn jquery, that I didn't want to redo it.");
             }
@@ -132,18 +132,30 @@
     <script>
         var cInversion = false;
         //variable for current color inversion
+        if(localStorage.hasOwnProperty('cInversion')){
+            //if the localStorage cInversion exists, the following will happen:
+            if(JSON.parse(localStorage.getItem('cInversion'))){
+                $('html').css('filter', 'invert(1)');
+                $('img').css({'filter': 'invert(1)', 'border-color': '#ff00ff'});
+                //if the localStorage cInversion is true, it will set the inverted colors, in order to catch the colors up with the localStorage cInversion
+            }
+            cInversion = JSON.parse(localStorage.getItem('cInversion'));
+            //cInversion set to the local cInversion
+        }
         function invertC(){
             if(cInversion){
                 cInversion = false;
+                localStorage.setItem('cInversion', cInversion);
                 $('html').css('filter', '');
-                $('img').css({'filter': '', 'border-color': 'lime', 'box-shadow': 'rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin'});
-                //if the color has been inverted, cInversion will turn false, the invert filter will turn off, and the image borders and box shadows will return to their usual coloring
+                $('img').css({'filter': '', 'border-color': 'lime'});
+                //if the color has been inverted, cInversion will turn false, the local storage cInversion will be saved, the invert filter will turn off, and the image borders will return to their usual coloring
             }
             else{
                 cInversion = true;
+                localStorage.setItem('cInversion', cInversion);
                 $('html').css('filter', 'invert(1)');
-                $('img').css({'filter': 'invert(1)', 'border-color': '#ff00ff', 'box-shadow': 'rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin'});
-                //if the color has not been inverted, cInversion will turn true, the invert filter will turn on, and the image borders and box shadows will turn to their inverted coloring
+                $('img').css({'filter': 'invert(1)', 'border-color': '#ff00ff'});
+                //if the color has not been inverted, cInversion will turn true, the local storage cInversion will be saved, the invert filter will turn on and the image borders will turn to their inverted coloring
             }
         }
     </script>

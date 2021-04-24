@@ -63,16 +63,29 @@
     </footer>
     <script>
         var cInversion = false;
+        //variable for current color inversion
+        if(localStorage.hasOwnProperty('cInversion')){
+            //if the localStorage cInversion exists, the following will happen:
+            if(JSON.parse(localStorage.getItem('cInversion'))){
+                $('html').css('filter', 'invert(1)');
+                $('img').css({'filter': 'invert(1)', 'border-color': '#ff00ff', 'box-shadow': 'rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin'});
+                //if the localStorage cInversion is true, it will set the inverted colors, in order to catch the colors up with the localStorage cInversion
+            }
+            cInversion = JSON.parse(localStorage.getItem('cInversion'));
+            //cInversion set to the local cInversion
+        }
         function invertC(){
             if(cInversion){
                 cInversion = false;
+                localStorage.setItem('cInversion', cInversion);
                 $('html').css('filter', '');
-                //if the color has been inverted, cInversion will turn false and the invert filter will turn off
+                //if the color has been inverted, cInversion will turn false, the invert filter will turn on, and the invert filter will turn off
             }
             else{
                 cInversion = true;
+                localStorage.setItem('cInversion', cInversion);
                 $('html').css('filter', 'invert(1)');
-                //if the color has not been inverted, cInversion will turn true and the invert filter will turn on
+                //if the color has not been inverted, cInversion will turn true, the invert filter will turn on, and the invert filter will turn on
             }
         }
     </script>

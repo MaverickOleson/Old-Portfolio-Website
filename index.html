@@ -50,18 +50,30 @@
     <script>
         var cInversion = false;
         //variable for current color inversion
+        if(localStorage.hasOwnProperty('cInversion')){
+            //if the localStorage cInversion exists, the following will happen:
+            if(JSON.parse(localStorage.getItem('cInversion'))){
+                $('html').css('filter', 'invert(1)');
+                $('img').css({'filter': 'invert(1)', 'border-color': '#ff00ff', 'box-shadow': 'rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin'});
+                //if the localStorage cInversion is true, it will set the inverted colors, in order to catch the colors up with the localStorage cInversion
+            }
+            cInversion = JSON.parse(localStorage.getItem('cInversion'));
+            //cInversion set to the local cInversion
+        }
         function invertC(){
             if(cInversion){
                 cInversion = false;
+                localStorage.setItem('cInversion', cInversion);
                 $('html').css('filter', '');
                 $('img').css({'filter': '', 'border-color': 'lime', 'box-shadow': 'rgba(0, 240, 0, 0.4) -0.5vmin 0.5vmin, rgba(0, 240, 0, 0.3) -1vmin 1vmin, rgba(0, 240, 0, 0.2) -1.5vmin 1.5vmin, rgba(0, 240, 0, 0.1) -2vmin 2vmin, rgba(0, 240, 0, 0.05) -2.5vmin 2.5vmin'});
-                //if the color has been inverted, cInversion will turn false, the invert filter will turn off, and the image borders and box shadows will return to their usual coloring
+                //if the color has been inverted, cInversion will turn false, the local storage cInversion will be saved, the invert filter will turn off, and the image borders and box shadows will return to their usual coloring
             }
             else{
                 cInversion = true;
+                localStorage.setItem('cInversion', cInversion);
                 $('html').css('filter', 'invert(1)');
                 $('img').css({'filter': 'invert(1)', 'border-color': '#ff00ff', 'box-shadow': 'rgba(240, 46, 170, 0.4) -0.5vmin 0.5vmin, rgba(240, 46, 170, 0.3) -1vmin 1vmin, rgba(240, 46, 170, 0.2) -1.5vmin 1.5vmin, rgba(240, 46, 170, 0.1) -2vmin 2vmin, rgba(240, 46, 170, 0.05) -2.5vmin 2.5vmin'});
-                //if the color has not been inverted, cInversion will turn true, the invert filter will turn on, and the image borders and box shadows will turn to their inverted coloring
+                //if the color has not been inverted, cInversion will turn true, the local storage cInversion will be saved, the invert filter will turn on, and the image borders and box shadows will turn to their inverted coloring
             }
         }
     </script>

@@ -41,18 +41,23 @@ body{
         #galleryView{
             @media screen and (orientation:landscape) {
                 width: 60vw;
+                height: 31vw;
                 #next{
                     right: 20vw;
                 }
             }
             @media screen and (orientation:portrait) {
                 width: 100vw;
+                height: 51vw;
                 #next{
                     right: 1vh;
                 }
             }
             box-sizing: border-box;
             border: 1vh double magenta;
+            #back{
+                z-index: 1;
+            }
             button{
                 width: 13%;
                 background-color: black;
